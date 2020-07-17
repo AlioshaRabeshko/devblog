@@ -1,0 +1,83 @@
+.App {
+  text-align: center;
+  /* width: 80%; */
+  background-color: #f8f9fa;
+  justify-content: center;
+}
+
+.top {
+  width: 100%;
+  color: rgb(44, 46, 54);
+  background-color: #fff;
+  display: flex;
+}
+
+.menu-list {
+  flex:1;
+  display: flex;
+  padding: 5px;
+}
+
+.menu-item {
+  flex:1;
+  margin: 0;
+  padding: 10px;
+  justify-items: flex-end;
+}
+
+.menu-item a:hover{
+  color: rgb(197, 14, 14);
+  cursor: pointer;
+}
+
+.menu-title {
+  flex:5;
+  font-size: 24px;
+  justify-items: start;
+  padding: 10px;
+  text-align: left;
+}
+
+.container {
+  margin: auto;
+}
+
+@media all and (min-width:1200px) {  
+    
+  .container {
+    width: 1200px;
+  }
+
+}
+
+@media all and (min-width:1000px) and (max-width:1199px) {  
+    
+  .container {
+    width: 980px;
+  }
+
+}
+
+@media all and (min-width:800px) and (max-width:999px) {  
+    
+  .container {
+    width: 780px;
+  }
+
+}
+
+@media all and (min-width:700px) and (max-width:799px) {  
+    
+  .container {
+    width: 650px;
+  }
+
+}
+
+@media all and (min-width:400px) and (max-width:699px) {  
+    
+  .container {
+    width: 100%;
+  }
+
+}
