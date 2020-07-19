@@ -18,8 +18,20 @@ class Left extends React.Component {
             <button>Subscribe</button>
           </div>
         </div>
-        <div className="left-widget">
+        <div className="left-widget github">
           GitHub page...
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </div>
     )

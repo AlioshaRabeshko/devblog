@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Menu extends React.Component {
   render() {
     return <div className="top">
       <div className="menu-title">DevBlog</div>
       <li className="menu-list">
-        <ul className="menu-item" href="#"><a>Main</a></ul>
-        <ul className="menu-item" href="#"><a>About</a></ul>
-        <ul className="menu-item" href="#"><a>User</a></ul>
+        <ul className="menu-item"><Link to="/" as="a">Main</Link></ul>
+        <ul className="menu-item"><Link to="/" as="a">About</Link></ul>
+        <ul className="menu-item"><Link to="/" as="a">User</Link></ul>
         {/* <ul className="menu-item"></ul> */}
       </li>
     </div>
