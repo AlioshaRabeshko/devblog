@@ -22,7 +22,7 @@ const statements = [
   {
     title: 'Ремонт ультразвуковой мойки Ultrasonic Cleaner HB-4818T',
     type: 'Ремонт',
-    image: 'https://images.wallpapersden.com/image/download/sung-jin-woo-anime-art_67920_3840x2160.jpg',
+    image: 'https://avatarko.ru/img/kartinka/32/vampir_anime_31566.jpg',
     description: 'Принесли на ремонт ультразвуковую мойку Ultrasonic Cleaner HB-4818T. Вскрыв корпус я обнаружил следы ремонта и характерный запах горелого. Вскрыв корпус я обнаружил следы ремонта и характерный запах горелого. Мойка состоит из двух блоков, силового и блока управления. Первым делом был извлечён из корпуса блок управления...',
     date: 'Today'
   },

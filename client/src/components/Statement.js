@@ -11,7 +11,7 @@ const statement = {
   date: 'Today',
 }
 
-class WideStatement extends React.Component {
+class Statement extends React.Component {
   render() {
     return (
       <div className="statement single">
@@ -40,4 +40,4 @@ class WideStatement extends React.Component {
   }
 }
 
-export default WideStatement;
+export default Statement;

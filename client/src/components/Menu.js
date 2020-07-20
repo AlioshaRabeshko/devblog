@@ -8,7 +8,7 @@ class Menu extends React.Component {
       <li className="menu-list">
         <ul className="menu-item"><Link to="/" as="a">Main</Link></ul>
         <ul className="menu-item"><Link to="/" as="a">About</Link></ul>
-        <ul className="menu-item"><Link to="/" as="a">User</Link></ul>
+        <ul className="menu-item"><Link to="/user" as="a">User</Link></ul>
         {/* <ul className="menu-item"></ul> */}
       </li>
     </div>
