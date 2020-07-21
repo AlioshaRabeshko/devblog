@@ -423,13 +423,78 @@ html, body, #root, .App {
   margin-bottom: 20px;
 }
 
-.editor-field {
+.editor {
   margin: 5px;
   min-height: 200px;
-  box-shadow: 0 2px 5px rgb(44, 46, 54);
+  box-shadow: 0 0 2px rgb(44, 46, 54);
   padding: 7px;
 }
 
-.editor-field:focus {
-  outline: none;
+.editor-toolbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.toolbar-btn.clickable-p {
+  padding: 7px;  
+  box-shadow: 0 0px 2px rgb(44, 46, 54);
+}
+
+.toolbar-btn img {
+  height: 20px;
+}
+
+.toolbar-btn p {
+  margin: 0;
+  font-size: 17px;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.modal {
+  font-size: 12px;
+}
+
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
 }
