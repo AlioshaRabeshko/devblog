@@ -29,6 +29,7 @@
 a:link,
 .clickable-p {
   text-decoration: none;
+  user-select: none;
 }
 
 a:visited {
@@ -156,6 +157,10 @@ a:hover,
   .narrow-statement {
     flex-basis: 100% !important;
   }
+
+  .gallery-image {
+    flex: 1 1 45% !important;
+  }
 }
 
 @media all and (max-width:699px) {  
@@ -185,6 +190,10 @@ a:hover,
   .statement-image-full {
     width: 93% !important;
   }
+
+  .gallery-image {
+    flex: 1 1 45% !important;
+  }
 }
 
 
@@ -198,6 +207,10 @@ a:hover,
 @media all and (max-width:499px) { 
   .sign-title {
     height: 110px !important;
+  }
+
+  .gallery-image {
+    flex: 1 1 100% !important;
   }
 }
 
@@ -392,7 +405,10 @@ html, body, #root, .App {
   width: 85%;
 }
 
-.sign-input:focus {
+.sign-input:focus,
+.new-statement-inputs input,
+.new-statement-inputs textarea,
+.gallery-image input{
   outline: none;
 }
 
@@ -420,14 +436,11 @@ html, body, #root, .App {
 }
 
 .editor {
-  margin-bottom: 20px;
-}
-
-.editor {
   margin: 5px;
-  min-height: 200px;
+  min-height: 400px;
   box-shadow: 0 0 2px rgb(44, 46, 54);
   padding: 7px;
+  margin-bottom: 20px;
 }
 
 .editor-toolbar {
@@ -436,7 +449,7 @@ html, body, #root, .App {
 }
 
 .toolbar-btn.clickable-p {
-  padding: 7px;  
+  padding: 7px;
   box-shadow: 0 0px 2px rgb(44, 46, 54);
 }
 
@@ -449,52 +462,147 @@ html, body, #root, .App {
   font-size: 17px;
 }
 
-.left {
-  text-align: left;
+.tabs {
+  font-size: 0;
+  max-width: 100%;
+  padding: 0;
 }
 
-.center {
-  text-align: center;
+.tabs>input[type="radio"] {
+  display: none;
 }
 
-.right {
-  text-align: right;
+.tabs>div {
+  display: none;
+  border: 1px solid #e0e0e0;
+  padding: 10px 15px;
+  font-size: 16px;
 }
 
-.modal {
-  font-size: 12px;
-}
-
-.modal > .header {
-  width: 100%;
-  border-bottom: 1px solid gray;
-  font-size: 18px;
-  text-align: center;
-  padding: 5px;
-}
-
-.modal > .content {
-  width: 100%;
-  padding: 10px 5px;
-}
-
-.modal > .actions {
-  width: 100%;
-  padding: 10px 5px;
-  margin: auto;
-  text-align: center;
-}
-
-.modal > .close {
-  cursor: pointer;
-  position: absolute;
+#tab-btn-1:checked~#content-1,
+#tab-btn-2:checked~#content-2,
+#tab-btn-3:checked~#content-3 {
   display: block;
-  padding: 2px 5px;
-  line-height: 20px;
-  right: -10px;
-  top: -10px;
-  font-size: 24px;
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #cfcece;
+}
+
+.tabs>label {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  padding: 8px 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tabs>input[type="radio"]:checked+label {
+  background-color: #fff;
+  color: rgb(14, 197, 14);
+  border-bottom: 1px solid #fff;
+}
+
+.new-statement-title {
+  margin: 5px 5px 20px 5px;
+}
+
+.new-statement-inputs input,
+.new-statement-inputs textarea,
+.gallery-image input {
+  width: 100%;
+  font-size: large;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.new-statement-inputs textarea {
+  margin-top: 10px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: medium;
+  height: 110px;
+}
+
+.gallery-image-list {
+  flex-flow: row wrap;
+  display: flex;
+}
+
+.gallery-image {
+  width: 30%;
+  flex: 1 1 30%;
+  padding: 3px;
+  box-shadow: 0 0px 2px rgb(44, 46, 54);
+}
+
+.gallery-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.user-console {
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+
+.img-input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+  z-index: -1;
+}
+
+.img-input + label {
+  font-size: 1em;
+  font-weight: 700;
+  color: white;
+  background-color:rgb(44, 46, 54);
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+}
+
+.img-input:focus + label,
+.img-input + label:hover {
+  background-color: rgb(197, 14, 14);
+}
+
+p.or {
+  text-align: center;
+  font-size: larger;
+}
+
+.gallery-image input {
+  width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: large;
+}
+
+.sign-button {
+  margin-top: 10px;
+  border: none;
+  color: black;
+  padding:8px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  background-color: #e7e7e7;
+}
+
+button:focus {
+  outline: 1px solid rgb(197, 14, 14);
 }
