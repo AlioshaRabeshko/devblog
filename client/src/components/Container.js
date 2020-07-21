@@ -7,16 +7,16 @@ import PrivateRoute from './PrivateRoute.js';
 import { Route, Switch } from 'react-router-dom';
 
 class Container extends React.Component {
-  render() {
-    return (
-      <Switch>
-        <Route path="/statement" component={Statement} />
-        <PrivateRoute path="/user" component={User} />
-        <Route path="/sign" component={Sign} />
-        <Route path="/" component={StatementList} />
-      </Switch>
-    )
-  }
+	render() {
+		return (
+			<Switch>
+				<Route path="/statement" component={Statement} />
+				<PrivateRoute path="/user" component={User} />
+				<Route path="/sign" component={Sign} />
+				<Route path="/" component={StatementList} />
+			</Switch>
+		);
+	}
 }
 
 export default Container;
