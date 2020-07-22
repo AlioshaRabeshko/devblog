@@ -1,5 +1,6 @@
 import {
 	GET_STATEMENTS,
+	GET_CATEGORIES,
 	SEARCH_STATEMENTS,
 	GET_STATEMENT,
 	ADD_STATEMENT,
@@ -7,13 +8,19 @@ import {
 } from './types';
 import axios from 'axios';
 
-export const getStatements = (category) => (dispatch) => {
-	axios.get(`/api/statements/${category ? category : null}`).then((res) =>
-		dispatch({
-			type: GET_STATEMENTS,
-			payload: res.data,
-		})
-	);
+export const getStatements = (category, author) => (dispatch) => {
+	axios
+		.get(
+			`/api/statements/${
+				category ? 'category/' + category : author ? 'author/' + author : ''
+			}`
+		)
+		.then((res) =>
+			dispatch({
+				type: GET_STATEMENTS,
+				payload: res.data,
+			})
+		);
 };
 
 export const getStatement = (id) => (dispatch) => {
@@ -56,6 +63,15 @@ export const deleteItem = (id) => (dispatch) => {
 	axios.delete(`/api/statements/${id}`).then(() =>
 		dispatch({
 			type: DELETE_STATEMENT,
+			payload: res.data,
+		})
+	);
+};
+
+export const getCategories = () => (dispatch) => {
+	axios.get(`/api/statements/categories`).then((res) =>
+		dispatch({
+			type: GET_CATEGORIES,
 			payload: res.data,
 		})
 	);
