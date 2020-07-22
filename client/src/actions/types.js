@@ -1,0 +1,10 @@
+export const GET_STATEMENTS = 'GET_STATEMENTS';
+export const SEARCH_STATEMENTS = 'SEARCH_STATEMENTS';
+export const GET_STATEMENT = 'GET_STATEMENT';
+export const DELETE_STATEMENT = 'DELETE_STATEMENT';
+export const ADD_STATEMENT = 'ADD_STATEMENT';
+export const GET_IMAGES = 'GET_IMAGES';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const LOG_IN = 'LOG_IN';
+export const SIGN_UP = 'SIGN_UP';
+export const CHECK_AUTH = 'CHECK_AUTH';

@@ -57,11 +57,18 @@ function User(props) {
 						<textarea
 							placeholder="Short description will be displayed in statements list"
 							onChange={(e) => setDescription(e.target.value)}></textarea>
-						<input
-							type="text"
-							placeholder="Image URL"
-							onChange={(e) => setImage(e.target.value)}
-						/>
+						<div className="select">
+							<input
+								type="text"
+								placeholder="Image URL"
+								onChange={(e) => setImage(e.target.value)}
+							/>
+							<label>Category:</label>
+							<select className="cat-select">
+								<option className="select-item">Пункт 1</option>
+								<option className="select-item">Пункт 2</option>
+							</select>
+						</div>
 					</div>
 					<h2>Statement main content</h2>
 					<Editor />

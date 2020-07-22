@@ -17,6 +17,14 @@ const images = [
 ];
 
 function Gallery() {
+	function copyToClipboard(link) {
+		const textField = document.createElement('textarea');
+		textField.innerText = link;
+		document.body.appendChild(textField);
+		textField.select();
+		document.execCommand('copy');
+		textField.remove();
+	}
 	while ((images.length - 2) % 3 !== 0) images.push('');
 	return (
 		<div className="gallery-image-list">
@@ -39,7 +47,7 @@ function Gallery() {
 				<div
 					className="gallery-image"
 					key={id + 1}
-					onClick={() => navigator.clipboard.writeText(el)}>
+					onClick={() => copyToClipboard(el)}>
 					<img src={el} alt="" />
 				</div>
 			))}

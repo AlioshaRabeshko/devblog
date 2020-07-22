@@ -402,7 +402,8 @@ body,
 .sign-input:focus,
 .new-statement-inputs input,
 .new-statement-inputs textarea,
-.gallery-image input {
+.gallery-image input,
+select {
 	outline: none;
 }
 
@@ -593,4 +594,27 @@ p.or {
 
 button:focus {
 	outline: 1px solid rgb(197, 14, 14);
+}
+
+.select {
+	display: flex;
+	flex-direction: row;
+}
+
+.select * {
+	margin-right: 20px;
+}
+
+.cat-select,
+.select-item {
+	line-height: 30px;
+	position: relative;
+	font-size: medium;
+	width: 50%;
+	border: none;
+	padding: 5px;
+}
+
+.select label {
+	padding-top: 5px;
 }
