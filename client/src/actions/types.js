@@ -1,5 +1,4 @@
 export const GET_STATEMENTS = 'GET_STATEMENTS';
-export const SEARCH_STATEMENTS = 'SEARCH_STATEMENTS';
 export const GET_STATEMENT = 'GET_STATEMENT';
 export const DELETE_STATEMENT = 'DELETE_STATEMENT';
 export const ADD_STATEMENT = 'ADD_STATEMENT';
@@ -8,3 +7,6 @@ export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const LOG_IN = 'LOG_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const CHECK_AUTH = 'CHECK_AUTH';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const PUT_LIKE = 'PUT_LIKE';
+export const PUT_DISLIKE = 'PUT_DISLIKE';

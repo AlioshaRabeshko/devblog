@@ -8,6 +8,7 @@
 		"@testing-library/user-event": "^7.2.1",
 		"@tinymce/tinymce-react": "^3.6.0",
 		"axios": "^0.19.2",
+		"https-proxy-agent": "^5.0.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-redux": "^7.2.0",
@@ -37,5 +38,9 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"proxy": "http://localhost:5000/",
+	"devDependencies": {
+		"axios-proxy-fix": "^0.16.3"
 	}
 }

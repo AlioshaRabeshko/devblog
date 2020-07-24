@@ -82,6 +82,12 @@ a:hover,
 	}
 }
 
+@media all and (min-width: 1400px) {
+	.gallery-image img {
+		height: 250px !important;
+	}
+}
+
 @media all and (max-width: 1400px) {
 	.container {
 		width: 980px;
@@ -151,6 +157,7 @@ a:hover,
 	}
 
 	.gallery-image {
+		max-width: 49% !important;
 		flex: 1 1 45% !important;
 	}
 }
@@ -180,10 +187,11 @@ a:hover,
 
 	.statement-image,
 	.statement-image-full {
-		width: 93% !important;
+		max-width: 93% !important;
 	}
 
 	.gallery-image {
+		max-width: 50% !important;
 		flex: 1 1 45% !important;
 	}
 }
@@ -191,7 +199,7 @@ a:hover,
 @media all and (max-width: 599px) {
 	.statement-image,
 	.statement-image-full {
-		width: 90% !important;
+		max-width: 90% !important;
 	}
 }
 
@@ -201,6 +209,7 @@ a:hover,
 	}
 
 	.gallery-image {
+		max-width: 100% !important;
 		flex: 1 1 100% !important;
 	}
 }
@@ -240,14 +249,14 @@ a:hover,
 .statement-image {
 	display: block;
 	object-fit: cover;
-	width: 95%;
+	max-width: 95%;
 	height: 25rem;
 }
 
 .statement-image-full {
 	display: block;
 	object-fit: cover;
-	width: 95%;
+	max-width: 95%;
 }
 
 .statement-type {
@@ -366,6 +375,7 @@ body,
 #root,
 .App {
 	height: 100%;
+	background-color: #f8f9fa;
 }
 
 .sign-title {
@@ -526,7 +536,7 @@ select {
 }
 
 .gallery-image {
-	width: 30%;
+	max-width: 32%;
 	flex: 1 1 30%;
 	padding: 3px;
 	box-shadow: 0 0px 2px rgb(44, 46, 54);
@@ -534,7 +544,7 @@ select {
 
 .gallery-image img {
 	width: 100%;
-	height: 200px;
+	height: 230px;
 	object-fit: cover;
 }
 
@@ -610,11 +620,18 @@ button:focus {
 	line-height: 30px;
 	position: relative;
 	font-size: medium;
-	width: 50%;
 	border: none;
 	padding: 5px;
 }
 
 .select label {
 	padding-top: 5px;
+}
+
+input.categories {
+	width: 40%;
+}
+
+.statement-content {
+	padding-bottom: 20px;
 }

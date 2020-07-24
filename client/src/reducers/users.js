@@ -2,7 +2,6 @@ import { LOG_IN, SIGN_UP, CHECK_AUTH } from '../actions/types';
 
 const initialState = {
 	images: [],
-	loading: false,
 };
 
 export default function (state = initialState, action) {

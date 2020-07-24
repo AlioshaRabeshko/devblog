@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-class Left extends React.Component {
-	render() {
-		return (
-			<div className="left-container">
-				<div className="left-widget input">
-					<p>Find statement</p>
-					<div>
-						<input type="text" />
+function Left() {
+	const [query, setQuery] = useState(null);
+	return (
+		<div className="left-container">
+			<div className="left-widget input">
+				<p>Find statement</p>
+				<div>
+					<input type="text" onChange={(e) => setQuery(e.target.value)} />
+					<Link to={query ? `/search/${query}` : ''}>
 						<button>Search</button>
-					</div>
+					</Link>
 				</div>
-				<div className="left-widget input">
-					<p>Subscribe on news</p>
-					<div>
-						<input type="text" placeholder="Email" />
-						<button>Subscribe</button>
-					</div>
-				</div>
-				<div className="left-widget github">GitHub page...</div>
 			</div>
-		);
-	}
+			<div className="left-widget input">
+				<p>Subscribe on news</p>
+				<div>
+					<input type="text" placeholder="Email" />
+					<button>Subscribe</button>
+				</div>
+			</div>
+			<div className="left-widget github">GitHub page...</div>
+		</div>
+	);
 }
 
 export default Left;

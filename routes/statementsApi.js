@@ -1,16 +1,27 @@
 'use strict';
 
 const express = require('express');
+const Sequelize = require('sequelize');
 const Statements = require('../models/statements');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-	Statements.findAll({ raw: true })
-		.then((data) => res.json(data))
+router.get('/category/', (req, res) => {
+	Statements.findAll({
+		attributes: [
+			[Sequelize.fn('DISTINCT', Sequelize.col('category')), 'category'],
+		],
+	}).then((category) => {
+		return category ? res.send(category) : res.status(400);
+	});
+});
+
+router.post('/add', (req, res) => {
+	Statements.create(req.body)
+		.then((data) => res.status(200).json(data))
 		.catch((err) => res.status(400).send({ msg: 'Something went wrong', err }));
 });
 
-router.get('/:id', (req, res) => {
+router.get('/statement/:id', (req, res) => {
 	Statements.findOne({ where: { id: req.params.id } })
 		.then((data) => res.json(data))
 		.catch((err) => res.status(400).send({ msg: 'Something went wrong', err }));
@@ -30,7 +41,7 @@ router.get('/category/:category', (req, res) => {
 });
 
 router.get('/author/:name', (req, res) => {
-	Statements.findAll({ where: { category: req.params.name }, raw: true })
+	Statements.findAll({ where: { author: req.params.name }, raw: true })
 		.then((data) => res.json(data))
 		.catch((err) => res.status(400).send({ msg: 'Something went wrong', err }));
 });
@@ -47,9 +58,9 @@ router.get('/search/:query', (req, res) => {
 		.catch((err) => res.status(400).send({ msg: 'Something went wrong', err }));
 });
 
-router.post('/add', (req, res) => {
-	Statements.create(req.body.data)
-		.then((data) => res.status(200).json(data))
+router.get('/', (req, res) => {
+	Statements.findAll({ raw: true })
+		.then((data) => res.json(data))
 		.catch((err) => res.status(400).send({ msg: 'Something went wrong', err }));
 });
 

@@ -1,17 +1,43 @@
-import React, { useState } from 'react';
-import { useAuth } from '../context/auth';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Editor from './Editor';
 import Gallery from './Gallery';
+import { useAuth } from '../context/auth';
+import { EditorContext } from '../context/editor';
+import { addStatement, getCategories } from '../actions/statements';
 
 function User(props) {
+	const statements = useSelector((state) => state.statements);
+	const dispatch = useDispatch();
 	const [tab, setTab] = useState({ one: true, two: false, three: false });
 	const [title, setTitle] = useState(null);
 	const [image, setImage] = useState(null);
 	const [description, setDescription] = useState(null);
-	const { setAuthTokens } = useAuth();
+	const [content, setContent] = useState(null);
+	const [category, setCategory] = useState(null);
+	const { user, setAuthTokens } = useAuth();
 
 	function logOut() {
 		setAuthTokens(null);
+	}
+
+	useEffect(() => dispatch(getCategories()), [dispatch]);
+
+	function submitStatement() {
+		if (!title) return;
+		if (!description) return;
+		if (!image) return;
+		if (!content) return;
+		dispatch(
+			addStatement({
+				title,
+				category,
+				description,
+				image,
+				content,
+				author: user,
+			})
+		);
 	}
 
 	return (
@@ -64,15 +90,29 @@ function User(props) {
 								onChange={(e) => setImage(e.target.value)}
 							/>
 							<label>Category:</label>
-							<select className="cat-select">
-								<option className="select-item">Пункт 1</option>
-								<option className="select-item">Пункт 2</option>
-							</select>
+							<input
+								className="categories"
+								type="text"
+								name="product"
+								list="categories"
+								onChange={(e) => setCategory(e.target.value)}
+							/>
+							<datalist id="categories">
+								<option className="select-item">Cars</option>
+								<option className="select-item">Gaming</option>
+								<option className="select-item">Pc hardware</option>
+							</datalist>
 						</div>
 					</div>
 					<h2>Statement main content</h2>
-					<Editor />
-					<button className="sign-button upload-button">Public</button>
+					<EditorContext.Provider value={{ content, setContent }}>
+						<Editor />
+					</EditorContext.Provider>
+					<button
+						className="sign-button upload-button"
+						onClick={submitStatement}>
+						Public
+					</button>
 				</div>
 				<div id="content-3">
 					<Gallery />

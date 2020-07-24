@@ -3,11 +3,12 @@ import {
 	GET_STATEMENT,
 	ADD_STATEMENT,
 	DELETE_STATEMENT,
-	SEARCH_STATEMENTS,
+	GET_CATEGORIES,
 } from '../actions/types';
 
 const initialState = {
 	statements: [],
+	categories: [],
 };
 
 export default function (state = initialState, action) {
@@ -17,15 +18,15 @@ export default function (state = initialState, action) {
 				...state,
 				statements: action.payload,
 			};
-		case SEARCH_STATEMENTS:
-			return {
-				...state,
-				statements: action.payload,
-			};
 		case GET_STATEMENT:
 			return {
 				...state,
 				statement: action.payload,
+			};
+		case GET_CATEGORIES:
+			return {
+				...state,
+				categories: action.payload,
 			};
 		case ADD_STATEMENT:
 			return {

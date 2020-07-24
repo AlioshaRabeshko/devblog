@@ -10,7 +10,7 @@ function Login() {
 	const [status, setStatus] = useState(0);
 	const [password, setPassword] = useState('');
 	const [rePassword, setRePassword] = useState('');
-	const { setAuthTokens } = useAuth();
+	const { authTokens, setAuthTokens } = useAuth();
 
 	function postLogin() {
 		if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -26,7 +26,7 @@ function Login() {
 		//   password
 		// }).then(result => {
 		//   if (result.status === 200) {
-		setAuthTokens('some token string');
+		setAuthTokens({ token: 'some token string', user: 'aliosharabeshko' });
 		setLoggedIn(true);
 		//   } else {
 		//     setIsError(true);
@@ -36,7 +36,7 @@ function Login() {
 		// });
 	}
 
-	if (isLoggedIn) {
+	if (authTokens) {
 		return <Redirect to="/user" />;
 	}
 
