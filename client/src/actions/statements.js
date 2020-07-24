@@ -6,18 +6,21 @@ import {
 	DELETE_STATEMENT,
 	PUT_LIKE,
 	PUT_DISLIKE,
+	GET_RATE,
 } from './types';
 import axios from 'axios';
 
-export const getStatements = (category, author, query) => (dispatch) => {
-	const req = category
-		? 'category/' + category
-		: author
-		? 'author/' + author
-		: query
-		? 'search/' + query
-		: '';
-	axios.get(`/api/statements/${req}`).then((res) =>
+export const getStatements = (category, author, query, page) => (dispatch) => {
+	const req = `${
+		category
+			? '/category/' + category
+			: author
+			? '/author/' + author
+			: query
+			? '/search/' + query
+			: ''
+	}/${page ? page : 0}/`;
+	axios.get(`/api/statements${req}`).then((res) =>
 		dispatch({
 			type: GET_STATEMENTS,
 			payload: res.data,
@@ -62,7 +65,7 @@ export const deleteItem = (id) => (dispatch) => {
 };
 
 export const getCategories = () => (dispatch) => {
-	axios.get('api/statements/category').then((res) =>
+	axios.get('/api/statements/category').then((res) =>
 		dispatch({
 			type: GET_CATEGORIES,
 			payload: res.data,
@@ -70,8 +73,8 @@ export const getCategories = () => (dispatch) => {
 	);
 };
 
-export const putLike = (id, user) => (dispatch) => {
-	axios.put(`api/statements/like/${id}`, user).then((res) =>
+export const putLike = (postId, userId) => (dispatch) => {
+	axios.put(`/api/statements/like/${postId}`, { userId }).then((res) =>
 		dispatch({
 			type: PUT_LIKE,
 			payload: res.data,
@@ -79,10 +82,19 @@ export const putLike = (id, user) => (dispatch) => {
 	);
 };
 
-export const putDisike = (id, user) => (dispatch) => {
-	axios.put(`api/statements/dislike/${id}`, user).then((res) =>
+export const putDislike = (postId, userId) => (dispatch) => {
+	axios.put(`/api/statements/dislike/${postId}`, { userId }).then((res) =>
 		dispatch({
 			type: PUT_DISLIKE,
+			payload: res.data,
+		})
+	);
+};
+
+export const getRate = (postId) => (dispatch) => {
+	axios.get(`/api/statements/rate/${postId}`).then((res) =>
+		dispatch({
+			type: GET_RATE,
 			payload: res.data,
 		})
 	);

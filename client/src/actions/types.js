@@ -10,3 +10,5 @@ export const CHECK_AUTH = 'CHECK_AUTH';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const PUT_LIKE = 'PUT_LIKE';
 export const PUT_DISLIKE = 'PUT_DISLIKE';
+export const GET_RATE = 'GET_RATE';
+export const LOG_OUT = 'LOG_OUT';

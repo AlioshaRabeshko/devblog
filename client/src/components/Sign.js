@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { useAuth } from '../context/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { signUp, logIn } from '../actions/users';
 
 function Login() {
-	const [isLoggedIn, setLoggedIn] = useState(false);
+	const auth = useSelector((state) => state.user.user);
+	const dispatch = useDispatch();
 	const [error, setError] = useState('');
-	const [email, setEmail] = useState('');
-	const [name, setName] = useState('');
+	const [email, setEmail] = useState('Leflylll@gmail.com');
+	const [name, setName] = useState('Aliosha Rabeshko');
 	const [status, setStatus] = useState(0);
-	const [password, setPassword] = useState('');
-	const [rePassword, setRePassword] = useState('');
-	const { authTokens, setAuthTokens } = useAuth();
+	const [password, setPassword] = useState('22dbfE2k');
+	const [rePassword, setRePassword] = useState('22dbfE2k');
 
-	function postLogin() {
+	function logIn_local() {
 		if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
 			setError('Wrong email');
 			return;
@@ -21,28 +22,40 @@ function Login() {
 			setError('Wrong password');
 			return;
 		}
-		// axios.post("https://www.somePlace.com/auth/login", {
-		//   userName,
-		//   password
-		// }).then(result => {
-		//   if (result.status === 200) {
-		setAuthTokens({ token: 'some token string', user: 'aliosharabeshko' });
-		setLoggedIn(true);
-		//   } else {
-		//     setIsError(true);
-		//   }
-		// }).catch(e => {
-		//   setIsError(true);
-		// });
+		dispatch(logIn({ email, password }));
 	}
 
-	if (authTokens) {
+	function sign() {
+		if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+			setError('Wrong email');
+			return;
+		}
+		if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/.test(password)) {
+			setError('Wrong password');
+			return;
+		}
+		if (password !== rePassword) {
+			setError("Passwords don't match");
+			return;
+		}
+		dispatch(
+			signUp({
+				email,
+				password,
+				name,
+				shortName: name.replace(' ', '').toLowerCase(),
+			})
+		);
+	}
+
+	if (auth.token) {
 		return <Redirect to="/user" />;
 	}
 
 	if (status === 0)
 		return (
 			<div className="sign">
+				{console.log(auth)}
 				<div className="sign-title">
 					<div>
 						<p>Sing In</p>
@@ -68,7 +81,7 @@ function Login() {
 						Forget password?
 					</p>
 				</div>
-				<button className="sign-button" onClick={postLogin}>
+				<button className="sign-button" onClick={logIn_local}>
 					Sign In
 				</button>
 				<p className="sign-error">{error}</p>
@@ -77,6 +90,7 @@ function Login() {
 	if (status === 1)
 		return (
 			<div className="sign">
+				{console.log(auth)}
 				<div className="sign-title">
 					<div>
 						<p>Sing Up</p>
@@ -104,7 +118,7 @@ function Login() {
 				<input
 					className="sign-input"
 					placeholder="Name"
-					type="password"
+					type="text"
 					onChange={(e) => setName(e.target.value)}
 				/>
 				<div className="sign-links">
@@ -112,7 +126,9 @@ function Login() {
 						Already have account?
 					</p>
 				</div>
-				<button className="sign-button">Sign Up</button>
+				<button className="sign-button" onClick={sign}>
+					Sign Up
+				</button>
 				<p className="sign-error">{error}</p>
 			</div>
 		);

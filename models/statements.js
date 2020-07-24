@@ -16,7 +16,6 @@ const Statements = db.define(
 		},
 		category: {
 			type: Sequelize.STRING,
-			allowNull: false,
 			defaultValue: 'Others',
 		},
 		image: {
@@ -33,14 +32,6 @@ const Statements = db.define(
 		author: {
 			type: Sequelize.STRING,
 			allowNull: false,
-		},
-		likes: {
-			type: Sequelize.INTEGER,
-			defaultValue: 0,
-		},
-		dislikes: {
-			type: Sequelize.INTEGER,
-			defaultValue: 0,
 		},
 		seen: {
 			type: Sequelize.INTEGER,

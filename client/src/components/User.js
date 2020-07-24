@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Editor from './Editor';
 import Gallery from './Gallery';
-import { useAuth } from '../context/auth';
 import { EditorContext } from '../context/editor';
 import { addStatement, getCategories } from '../actions/statements';
+import { logOut } from '../actions/users';
 
 function User(props) {
-	const statements = useSelector((state) => state.statements);
+	const user = useSelector((state) => state.user.user.user);
+	// const statements = useSelector((state) => state.statements);
 	const dispatch = useDispatch();
 	const [tab, setTab] = useState({ one: true, two: false, three: false });
 	const [title, setTitle] = useState(null);
@@ -15,10 +16,11 @@ function User(props) {
 	const [description, setDescription] = useState(null);
 	const [content, setContent] = useState(null);
 	const [category, setCategory] = useState(null);
-	const { user, setAuthTokens } = useAuth();
 
-	function logOut() {
-		setAuthTokens(null);
+	function logOut_local() {
+		localStorage.setItem('user', null);
+		localStorage.setItem('token', null);
+		dispatch(logOut());
 	}
 
 	useEffect(() => dispatch(getCategories()), [dispatch]);
@@ -35,7 +37,7 @@ function User(props) {
 				description,
 				image,
 				content,
-				author: user,
+				author: user.shortName,
 			})
 		);
 	}
@@ -69,7 +71,7 @@ function User(props) {
 				<label htmlFor="tab-btn-3">Gallery</label>
 
 				<div id="content-1">
-					<button className="sign-button upload-button" onClick={logOut}>
+					<button className="sign-button upload-button" onClick={logOut_local}>
 						Log Out
 					</button>
 				</div>

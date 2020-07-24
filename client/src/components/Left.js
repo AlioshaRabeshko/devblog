@@ -9,7 +9,7 @@ function Left() {
 				<p>Find statement</p>
 				<div>
 					<input type="text" onChange={(e) => setQuery(e.target.value)} />
-					<Link to={query ? `/search/${query}` : ''}>
+					<Link to={query ? `/search/${query}/` : ''}>
 						<button>Search</button>
 					</Link>
 				</div>

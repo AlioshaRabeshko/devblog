@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Menu from './components/Menu';
 import Container from './components/Container';
-import { AuthContext } from './context/auth.js';
+import { useDispatch } from 'react-redux';
+import { check } from './actions/users';
 
 function App() {
-	const existingTokens = JSON.parse(localStorage.getItem('token'));
-	const [user, setUser] = useState(existingTokens ? existingTokens.user : null);
-	const [authTokens, setAuthTokens] = useState(existingTokens);
-	const setTokens = (data) => {
-		localStorage.setItem('token', JSON.stringify(data));
-		if (data) {
-			setUser(data.user);
-			setAuthTokens(data.token);
-		} else {
-			setUser(null);
-			setAuthTokens(null);
-		}
-	};
+	const dispatch = useDispatch();
+	useEffect(() => {
+		const existingToken = JSON.parse(localStorage.getItem('token'));
+		if (existingToken) dispatch(check(existingToken));
+	}, [dispatch]);
+
 	return (
 		<div className="App">
-			<AuthContext.Provider
-				value={{ authTokens, setAuthTokens: setTokens, user }}>
-				<Menu />
-				<div className="container">
-					<Container />
-				</div>
-			</AuthContext.Provider>
+			<Menu />
+			<div className="container">
+				<Container />
+			</div>
 		</div>
 	);
 }

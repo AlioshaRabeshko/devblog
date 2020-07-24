@@ -1,16 +1,33 @@
 import React, { useEffect } from 'react';
-import like from '../svgs/like.svg';
-import dislike from '../svgs/dislike.svg';
+import likeSvg from '../svgs/like.svg';
+import dislikeSvg from '../svgs/dislike.svg';
 import see from '../svgs/seen.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getStatement } from '../actions/statements';
+import {
+	getStatement,
+	getRate,
+	putLike,
+	putDislike,
+} from '../actions/statements';
 import { Redirect } from 'react-router-dom';
 
 function Statement(props) {
-	const statement = useSelector((state) => state.statements.statement);
+	const user = useSelector((state) => state.user.user);
+	const { statement, rate } = useSelector((state) => state.statements);
 	const dispatch = useDispatch();
-	useEffect(() => dispatch(getStatement(props.match.params.id)), []);
-	if (!props.match.params.id) return <Redirect to="/undefined" />;
+	const { id } = props.match.params;
+
+	useEffect(() => {
+		dispatch(getStatement(id));
+		dispatch(getRate(id));
+	}, [dispatch, id]);
+	function like() {
+		if (user.token) dispatch(putLike(id, user.user.id));
+	}
+	function dislike() {
+		if (user.token) dispatch(putDislike(id, user.user.id));
+	}
+	if (!id) return <Redirect to="/undefined" />;
 	if (statement) {
 		const {
 			title,
@@ -19,8 +36,6 @@ function Statement(props) {
 			description,
 			content,
 			createdAt,
-			likes,
-			dislikes,
 			seen,
 		} = statement;
 		return (
@@ -37,12 +52,12 @@ function Statement(props) {
 				<div className="statement-footer">
 					<p className="statement-date">{createdAt.split('T')[0]}</p>
 					<div className="footer-element">
-						<img src={like} alt="" />
-						<p>{likes}</p>
+						<img src={likeSvg} alt="" onClick={like} />
+						<p>{rate ? rate.likes : 0}</p>
 					</div>
 					<div className="footer-element">
-						<img src={dislike} alt="" />
-						<p>{dislikes}</p>
+						<img src={dislikeSvg} alt="" onClick={dislike} />
+						<p>{rate ? rate.dislikes : 0}</p>
 					</div>
 					<div className="footer-element">
 						<img src={see} alt="" />

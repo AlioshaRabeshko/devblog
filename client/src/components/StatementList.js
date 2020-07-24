@@ -5,32 +5,37 @@ import NarrowStatement from './NarrowStatement';
 import WideStatement from './WideStatement';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStatements } from '../actions/statements';
+import { useParams } from 'react-router-dom';
 
 function StatementList(props) {
-	console.log(props.match);
 	const statements = useSelector((state) => state.statements.statements);
 	const dispatch = useDispatch();
-	const { author, category, query } = props.match.params;
-	useEffect(() => dispatch(getStatements(category, author, query)), [
+	const { author, category, query, page } = useParams();
+	useEffect(() => dispatch(getStatements(category, author, query, page)), [
 		dispatch,
 		author,
 		category,
 		query,
+		page,
 	]);
-	return statements[0] ? (
+	return (
 		<div className="container">
 			<div className="right-container">
-				<WideStatement statement={statements[0]} />
+				{statements.rows[0] ? (
+					<WideStatement statement={statements.rows[0]} />
+				) : (
+					<WideStatement />
+				)}
 			</div>
 			<Left />
-			{statements.map((el, id) =>
-				id !== 0 ? <NarrowStatement statement={el} key={id} /> : ''
-			)}
-			{statements % 2 !== 0 ? <NarrowStatement /> : ''}
-			<Pagination />
+			{statements.rows[0]
+				? statements.rows.map((el, id) =>
+						id !== 0 ? <NarrowStatement statement={el} key={id} /> : ''
+				  )
+				: ''}
+			{statements.rows % 2 !== 0 ? <NarrowStatement /> : ''}
+			<Pagination count={statements.count} />
 		</div>
-	) : (
-		<div></div>
 	);
 }
 

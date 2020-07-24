@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { useAuth } from '../context/auth';
+import { useSelector } from 'react-redux';
 
 function PrivateRoute({ component: Component, ...rest }) {
-	const { authTokens } = useAuth();
+	const token = useSelector((state) => state.user.user.token);
 	return (
 		<Route
 			{...rest}
 			render={(props) =>
-				authTokens ? <Component {...props} /> : <Redirect to="/sign" />
+				token ? <Component {...props} /> : <Redirect to="/sign" />
 			}
 		/>
 	);

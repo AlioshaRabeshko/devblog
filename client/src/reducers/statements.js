@@ -4,10 +4,14 @@ import {
 	ADD_STATEMENT,
 	DELETE_STATEMENT,
 	GET_CATEGORIES,
+	GET_RATE,
 } from '../actions/types';
 
 const initialState = {
-	statements: [],
+	statements: {
+		count: 0,
+		rows: [],
+	},
 	categories: [],
 };
 
@@ -22,6 +26,11 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				statement: action.payload,
+			};
+		case GET_RATE:
+			return {
+				...state,
+				rate: action.payload,
 			};
 		case GET_CATEGORIES:
 			return {
