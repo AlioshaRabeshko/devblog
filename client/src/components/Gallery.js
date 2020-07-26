@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uploadImages, getImages } from '../actions/images';
 
 function Gallery() {
+	const user = useSelector((state) => state.user.user.user);
 	const images = useSelector((state) => state.images.images);
 	const dispatch = useDispatch();
 	function uploadImg(e) {
-		dispatch(uploadImages(e.target.files, 'tmp'));
+		dispatch(uploadImages(e.target.files, user.shortName));
 	}
-	useEffect(() => dispatch(getImages('tmp')), [dispatch]);
+	useEffect(() => dispatch(getImages(user.shortName)), [
+		dispatch,
+		user.shortName,
+	]);
 	function copyToClipboard(link) {
 		const textField = document.createElement('textarea');
 		textField.innerText = link;

@@ -1,6 +1,5 @@
 .App {
 	text-align: center;
-	background-color: #f8f9fa;
 	justify-content: center;
 }
 
@@ -121,7 +120,7 @@ a:hover,
 		width: 100%;
 	}
 
-	.narrow-statement {
+	.narrow-post {
 		flex-basis: 40% !important;
 	}
 
@@ -153,7 +152,7 @@ a:hover,
 		width: 100%;
 	}
 
-	.narrow-statement {
+	.narrow-post {
 		flex-basis: 100% !important;
 	}
 
@@ -182,12 +181,12 @@ a:hover,
 		width: 100%;
 	}
 
-	.narrow-statement {
+	.narrow-post {
 		flex-basis: 100% !important;
 	}
 
-	.statement-image,
-	.statement-image-full {
+	.post-image,
+	.post-image-full {
 		max-width: 93% !important;
 	}
 
@@ -198,8 +197,8 @@ a:hover,
 }
 
 @media all and (max-width: 599px) {
-	.statement-image,
-	.statement-image-full {
+	.post-image,
+	.post-image-full {
 		max-width: 90% !important;
 	}
 }
@@ -227,7 +226,7 @@ a:hover,
 	}
 }
 
-.statement,
+.post,
 .sign {
 	margin: 10px;
 	background-color: #fff;
@@ -235,36 +234,36 @@ a:hover,
 	box-shadow: 0 0 5px rgb(44, 46, 54);
 }
 
-.wide-statement > *,
-.narrow-statement > *,
-.statement > * {
+.wide-post > *,
+.narrow-post > *,
+.post > * {
 	text-align: left;
 	padding: 0 20px;
 }
 
-.statement-title {
+.post-title {
 	font-size: 22px;
 	margin: 10px 0;
 }
 
-.statement-image {
+.post-image {
 	display: block;
 	object-fit: cover;
 	max-width: 95%;
 	height: 25rem;
 }
 
-.statement-image-full {
+.post-image-full {
 	display: block;
 	object-fit: cover;
 	max-width: 95%;
 }
 
-.statement-type {
+.post-type {
 	margin: 0 0 10px 20px;
 }
 
-.statement-description {
+.post-description {
 	font-family: Source Sans Pro, Arial, Helvetica, sans-serif;
 	line-height: 1.7em;
 	font-size: 1em;
@@ -283,6 +282,7 @@ a:hover,
 	font-size: medium;
 	padding-left: 3px;
 	margin: auto;
+	margin-top: 10px;
 }
 
 .left-widget.input button,
@@ -299,12 +299,11 @@ a:hover,
 	background-color: #e7e7e7;
 }
 
-.left-widget.input p {
-	margin: 0 0 10px 0;
+.left-widget.input label {
 	font-size: large;
 }
 
-.narrow-statement {
+.narrow-post {
 	flex: 2 2 40%;
 }
 
@@ -334,7 +333,7 @@ a:hover,
 	height: 100%;
 }
 
-.statement-footer {
+.post-footer {
 	display: flex;
 	justify-content: space-around;
 	box-shadow: 0 -1px 5px rgb(44, 46, 54);
@@ -347,7 +346,7 @@ a:hover,
 	width: 20px;
 }
 
-.statement-date {
+.post-date {
 	margin: 16px;
 }
 
@@ -376,7 +375,7 @@ body,
 #root,
 .App {
 	height: 100%;
-	background-color: #f8f9fa;
+	background-color: #f6f7f8;
 }
 
 .sign-title {
@@ -411,8 +410,8 @@ body,
 }
 
 .sign-input:focus,
-.new-statement-inputs input,
-.new-statement-inputs textarea,
+.new-post-inputs input,
+.new-post-inputs textarea,
 .gallery-image input,
 select {
 	outline: none;
@@ -509,12 +508,12 @@ select {
 	border-bottom: 1px solid #fff;
 }
 
-.new-statement-title {
+.new-post-title {
 	margin: 5px 5px 20px 5px;
 }
 
-.new-statement-inputs input,
-.new-statement-inputs textarea,
+.new-post-inputs input,
+.new-post-inputs textarea,
 .gallery-image input {
 	width: 100%;
 	font-size: large;
@@ -523,7 +522,7 @@ select {
 	border-top: none;
 }
 
-.new-statement-inputs textarea {
+.new-post-inputs textarea {
 	margin: 10px 0;
 	resize: vertical;
 	font-family: inherit;
@@ -633,10 +632,19 @@ input.categories {
 	width: 40%;
 }
 
-.statement-content {
+.post-content {
 	padding-bottom: 20px;
+}
+
+.post-content img {
+	max-width: 100%;
+	object-fit: cover;
 }
 
 ul {
 	margin: 0;
+}
+
+.text-center {
+	text-align: center;
 }

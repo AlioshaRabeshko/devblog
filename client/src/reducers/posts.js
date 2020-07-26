@@ -1,14 +1,14 @@
 import {
-	GET_STATEMENTS,
-	GET_STATEMENT,
-	ADD_STATEMENT,
-	DELETE_STATEMENT,
+	GET_POSTS,
+	GET_POST,
+	ADD_POST,
+	DELETE_POST,
 	GET_CATEGORIES,
 	GET_RATE,
 } from '../actions/types';
 
 const initialState = {
-	statements: {
+	posts: {
 		count: 0,
 		rows: [],
 	},
@@ -17,15 +17,15 @@ const initialState = {
 
 export default function (state = initialState, action) {
 	switch (action.type) {
-		case GET_STATEMENTS:
+		case GET_POSTS:
 			return {
 				...state,
-				statements: action.payload,
+				posts: action.payload,
 			};
-		case GET_STATEMENT:
+		case GET_POST:
 			return {
 				...state,
-				statement: action.payload,
+				post: action.payload,
 			};
 		case GET_RATE:
 			return {
@@ -37,12 +37,12 @@ export default function (state = initialState, action) {
 				...state,
 				categories: action.payload,
 			};
-		case ADD_STATEMENT:
+		case ADD_POST:
 			return {
 				...state,
 				statement: action.payload,
 			};
-		case DELETE_STATEMENT:
+		case DELETE_POST:
 			return {
 				...state,
 				response: action.payload,

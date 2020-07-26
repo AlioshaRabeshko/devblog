@@ -1,6 +1,6 @@
 import React from 'react';
-import StatementList from './StatementList';
-import Statement from './Statement';
+import PostList from './PostList';
+import Post from './Post';
 import User from './User';
 import Sign from './Sign';
 import Undefined from './Undefined';
@@ -11,15 +11,15 @@ class Container extends React.Component {
 	render() {
 		return (
 			<Switch>
-				<Route path="/statement/:id" component={Statement} />
-				<Route path="/author/:author/:page?" component={StatementList} />
-				<Route path="/category/:category/:page?" component={StatementList} />
-				<Route path="/search/:query/:page?" component={StatementList} />
+				<Route path="/post/:id" component={Post} />
+				<Route path="/author/:author/:page?" component={PostList} />
+				<Route path="/category/:category/:page?" component={PostList} />
+				<Route path="/search/:query/:page?" component={PostList} />
 				<PrivateRoute path="/user" component={User} />
 				<Route path="/sign" component={Sign} />
 				<Route path="/undefined" component={Undefined} />
-				<Route path="/:page" component={StatementList} />
-				<Route path="/" component={StatementList} />
+				<Route path="/:page" component={PostList} />
+				<Route path="/" component={PostList} />
 			</Switch>
 		);
 	}

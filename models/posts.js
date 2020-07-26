@@ -1,8 +1,10 @@
+'use strict';
+
 const db = require('./index');
 const Sequelize = require('sequelize');
 
-const Statements = db.define(
-	'statements',
+const Posts = db.define(
+	'posts',
 	{
 		id: {
 			type: Sequelize.INTEGER,
@@ -44,4 +46,4 @@ const Statements = db.define(
 	}
 );
 
-module.exports = Statements;
+module.exports = Posts;

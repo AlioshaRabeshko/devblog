@@ -6,9 +6,8 @@ function Left() {
 	return (
 		<div className="left-container">
 			<div className="left-widget input">
-				<p>Find statement</p>
 				<div>
-					<label htmlFor="search">Search post</label>
+					<label htmlFor="search">Find post</label>
 					<input
 						type="text"
 						id="search"
@@ -20,9 +19,8 @@ function Left() {
 				</div>
 			</div>
 			<div className="left-widget input">
-				<p>Subscribe on news</p>
 				<div>
-					<label htmlFor="subscribe">subscribe</label>
+					<label htmlFor="subscribe">Subscribe on news</label>
 					<input id="subscribe" type="text" placeholder="Email" />
 					<button>Subscribe</button>
 				</div>

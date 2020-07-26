@@ -55,7 +55,6 @@ function Login() {
 	if (status === 0)
 		return (
 			<div className="sign">
-				{console.log(auth)}
 				<div className="sign-title">
 					<div>
 						<p>Sing In</p>

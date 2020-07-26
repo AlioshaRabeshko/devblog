@@ -10,19 +10,18 @@ function TextEditor() {
 	return (
 		<Editor
 			apiKey="hcnwhdxlemckajk9mdxkg4k04eqi1vk1lmpzr6d1qjsandxi"
-			initialValue="<p>Type your text here</p>"
 			init={{
 				menubar: true,
 				plugins: [
-					'advlist autolink lists link image charmap preview anchor',
-					'searchreplace visualblocks code fullscreen',
-					'insertdatetime media table paste help wordcount autoresize',
+					'advlist autolink lists link image charmap preview anchor \n' +
+						'searchreplace visualblocks code fullscreen \n' +
+						'insertdatetime media table paste help wordcount autoresize',
 				],
 				toolbar1:
-					'formatselect | bold italic underline backcolor | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | image media link table \
-             removeformat insertdatetime | fullscreen preview code help',
+					'formatselect | bold italic underline backcolor | \n' +
+					'alignleft aligncenter alignright alignjustify | \n' +
+					'bullist numlist outdent indent | image media link table \n' +
+					'removeformat insertdatetime | fullscreen preview code help',
 				block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Code=code',
 			}}
 			onEditorChange={handleEditorChange}

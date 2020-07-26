@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function WideStatement(props) {
+function Pagination(props) {
 	const arr = [];
 
 	const pages = Math.ceil(props.count / 7);
@@ -24,4 +24,4 @@ function WideStatement(props) {
 	);
 }
 
-export default WideStatement;
+export default Pagination;

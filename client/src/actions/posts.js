@@ -1,16 +1,16 @@
 import {
-	GET_STATEMENTS,
+	GET_POSTS,
 	GET_CATEGORIES,
-	GET_STATEMENT,
-	ADD_STATEMENT,
-	DELETE_STATEMENT,
+	GET_POST,
+	ADD_POST,
+	DELETE_POST,
 	PUT_LIKE,
 	PUT_DISLIKE,
 	GET_RATE,
 } from './types';
 import axios from 'axios';
 
-export const getStatements = (category, author, query, page) => (dispatch) => {
+export const getPosts = (category, author, query, page) => (dispatch) => {
 	const req = `${
 		category
 			? '/category/' + category
@@ -20,34 +20,34 @@ export const getStatements = (category, author, query, page) => (dispatch) => {
 			? '/search/' + query
 			: ''
 	}/${page ? page : 0}/`;
-	axios.get(`/api/statements${req}`).then((res) =>
+	axios.get(`/api/posts${req}`).then((res) =>
 		dispatch({
-			type: GET_STATEMENTS,
+			type: GET_POSTS,
 			payload: res.data,
 		})
 	);
 };
 
-export const getStatement = (id) => (dispatch) => {
-	axios.get(`/api/statements/statement/${id}`).then((res) =>
+export const getPost = (id) => (dispatch) => {
+	axios.get(`/api/posts/post/${id}`).then((res) =>
 		dispatch({
-			type: GET_STATEMENT,
+			type: GET_POST,
 			payload: res.data,
 		})
 	);
 };
 
-export const addStatement = (data) => (dispatch) => {
-	axios.post('/api/statements/add', data).then((res) => {
+export const addPost = (data) => (dispatch) => {
+	axios.post('/api/posts/add', data).then((res) => {
 		dispatch({
-			type: ADD_STATEMENT,
+			type: ADD_POST,
 			payload: res.data,
 		});
 	});
 };
 
 // export const editItem = (collection, id, data) => (dispatch) => {
-// 	axios.post(`/api/statements/${collection}/${id}/edit`, data).then((res) =>
+// 	axios.post(`/api/posts/${collection}/${id}/edit`, data).then((res) =>
 // 		dispatch({
 // 			type: ADD_STATEMENT,
 // 			payload: res.data,
@@ -56,16 +56,16 @@ export const addStatement = (data) => (dispatch) => {
 // };
 
 export const deleteItem = (id) => (dispatch) => {
-	axios.delete(`/api/statements/${id}`).then((res) =>
+	axios.delete(`/api/posts/${id}`).then((res) =>
 		dispatch({
-			type: DELETE_STATEMENT,
+			type: DELETE_POST,
 			payload: res.data,
 		})
 	);
 };
 
 export const getCategories = () => (dispatch) => {
-	axios.get('/api/statements/category').then((res) =>
+	axios.get('/api/posts/category').then((res) =>
 		dispatch({
 			type: GET_CATEGORIES,
 			payload: res.data,
@@ -74,7 +74,7 @@ export const getCategories = () => (dispatch) => {
 };
 
 export const putLike = (postId, userId) => (dispatch) => {
-	axios.put(`/api/statements/like/${postId}`, { userId }).then((res) =>
+	axios.put(`/api/posts/like/${postId}`, { userId }).then((res) =>
 		dispatch({
 			type: PUT_LIKE,
 			payload: res.data,
@@ -83,7 +83,7 @@ export const putLike = (postId, userId) => (dispatch) => {
 };
 
 export const putDislike = (postId, userId) => (dispatch) => {
-	axios.put(`/api/statements/dislike/${postId}`, { userId }).then((res) =>
+	axios.put(`/api/posts/dislike/${postId}`, { userId }).then((res) =>
 		dispatch({
 			type: PUT_DISLIKE,
 			payload: res.data,
@@ -92,7 +92,7 @@ export const putDislike = (postId, userId) => (dispatch) => {
 };
 
 export const getRate = (postId) => (dispatch) => {
-	axios.get(`/api/statements/rate/${postId}`).then((res) =>
+	axios.get(`/api/posts/rate/${postId}`).then((res) =>
 		dispatch({
 			type: GET_RATE,
 			payload: res.data,

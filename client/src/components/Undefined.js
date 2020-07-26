@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Statement() {
+function Undefined() {
 	return (
-		<div className="statement single">
-			<p className="statement-title">There is no such page</p>
+		<div className="post single">
+			<p className="post-title">There is no such page</p>
 		</div>
 	);
 }
 
-export default Statement;
+export default Undefined;

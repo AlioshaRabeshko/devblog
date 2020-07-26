@@ -2,14 +2,14 @@
 
 const express = require('express');
 const Sequelize = require('sequelize');
-const Statements = require('../models/statements');
+const Posts = require('../models/posts');
 const Images = require('../models/images');
 const Rating = require('../models/rating');
 const router = express.Router();
 const sharp = require('sharp');
 
 router.get('/category/', (req, res) => {
-	Statements.findAll({
+	Posts.findAll({
 		attributes: [
 			[Sequelize.fn('DISTINCT', Sequelize.col('category')), 'category'],
 		],
@@ -31,7 +31,7 @@ router.post('/add', (req, res) => {
 					author: 'system',
 				},
 			}).then(() => {
-				Statements.create({
+				Posts.create({
 					author,
 					category,
 					content,
@@ -51,8 +51,8 @@ router.post('/add', (req, res) => {
 		.catch((err) => console.log(err));
 });
 
-router.get('/statement/:id', (req, res) => {
-	Statements.findOne({ where: { id: req.params.id } })
+router.get('/post/:id', (req, res) => {
+	Posts.findOne({ where: { id: req.params.id } })
 		.then((data) => {
 			data.seen++;
 			data.save();
@@ -62,7 +62,7 @@ router.get('/statement/:id', (req, res) => {
 });
 
 router.get('/category/:category/:page', (req, res) => {
-	Statements.findAndCountAll({
+	Posts.findAndCountAll({
 		order: [['createdAt', 'DESC']],
 		limit: 7,
 		offset: +req.params.page * 7,
@@ -78,7 +78,7 @@ router.get('/category/:category/:page', (req, res) => {
 });
 
 router.get('/author/:name/:page', (req, res) => {
-	Statements.findAndCountAll({
+	Posts.findAndCountAll({
 		order: [['createdAt', 'DESC']],
 		limit: 7,
 		offset: +req.params.page * 7,
@@ -90,7 +90,7 @@ router.get('/author/:name/:page', (req, res) => {
 });
 
 router.get('/search/:query/:page', (req, res) => {
-	Statements.findAndCountAll({
+	Posts.findAndCountAll({
 		order: [['createdAt', 'DESC']],
 		raw: true,
 	})
@@ -141,7 +141,7 @@ router.get('/rate/:id', async (req, res) => {
 });
 
 router.get('/:page', async (req, res) => {
-	Statements.findAndCountAll({
+	Posts.findAndCountAll({
 		order: [['createdAt', 'DESC']],
 		limit: 7,
 		offset: +req.params.page * 7,

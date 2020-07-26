@@ -8,7 +8,7 @@ const compression = require('compression');
 
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
-app.use('/api/statements', require('./routes/statementsApi'));
+app.use('/api/posts', require('./routes/postsApi'));
 app.use('/api/images', require('./routes/imagesApi'));
 app.use('/api/users', require('./routes/usersApi'));
 app.use(compression());

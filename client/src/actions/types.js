@@ -1,7 +1,7 @@
-export const GET_STATEMENTS = 'GET_STATEMENTS';
-export const GET_STATEMENT = 'GET_STATEMENT';
-export const DELETE_STATEMENT = 'DELETE_STATEMENT';
-export const ADD_STATEMENT = 'ADD_STATEMENT';
+export const GET_POSTS = 'GET_POSTS';
+export const GET_POST = 'GET_POST';
+export const DELETE_POST = 'DELETE_POST';
+export const ADD_POST = 'ADD_POST';
 export const GET_IMAGES = 'GET_IMAGES';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const LOG_IN = 'LOG_IN';

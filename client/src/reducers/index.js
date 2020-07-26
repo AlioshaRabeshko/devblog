@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import statementsReducer from './statements';
+import postsReducer from './posts';
 import imagesReducer from './images';
 import usersReducer from './users';
 
 export default combineReducers({
-	statements: statementsReducer,
+	posts: postsReducer,
 	images: imagesReducer,
 	user: usersReducer,
 });
