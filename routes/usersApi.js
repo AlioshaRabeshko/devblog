@@ -8,7 +8,7 @@ const Users = require('../models/users');
 router.post('/login', (req, res) => {
 	Users.findOne({ where: { email: req.body.data.email } })
 		.then((data) => {
-			const { id, name, shortName } = data;
+			const { id, name, shortName, verified } = data;
 			data.password === req.body.data.password
 				? res.status(200).send({
 						token: jwt.sign(
@@ -18,7 +18,7 @@ router.post('/login', (req, res) => {
 							},
 							'secret'
 						),
-						user: { id, name, shortName },
+						user: { id, name, shortName, verified },
 				  })
 				: res.status(400).send({ msg: 'Wrong password...' });
 		})

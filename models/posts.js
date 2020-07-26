@@ -39,6 +39,10 @@ const Posts = db.define(
 			type: Sequelize.INTEGER,
 			defaultValue: 0,
 		},
+		verified: {
+			type: Sequelize.BOOLEAN,
+			defaultValue: false,
+		},
 	},
 	{
 		charset: 'utf8',

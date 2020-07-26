@@ -37,6 +37,10 @@ const Users = db.define(
 		status: {
 			type: Sequelize.STRING,
 		},
+		verified: {
+			type: Sequelize.INTEGER,
+			defaultValue: 0,
+		},
 	},
 	{
 		charset: 'utf8',
