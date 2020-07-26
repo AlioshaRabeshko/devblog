@@ -16,7 +16,7 @@ function WideStatement(props) {
 			<p className="statement-type">
 				<Link to={`/category/${category}/`}>{category}</Link>
 			</p>
-			<img className="statement-image" alt="" src={`http://${image}`} />
+			<img className="statement-image" alt="" src={`${image}`} />
 			<p className="statement-description">{description}</p>
 			<p className="statement-date">{date}</p>
 		</div>

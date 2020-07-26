@@ -39,7 +39,7 @@ function Gallery() {
 					className="gallery-image"
 					key={id + 1}
 					onClick={() =>
-						copyToClipboard(`${images.host}:5000/api/images/${el.name}`)
+						copyToClipboard(`http://${images.host}:5000/api/images/${el.name}`)
 					}>
 					<img
 						src={`http://${images.host}:5000/api/images/${el.name}`}

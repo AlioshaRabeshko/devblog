@@ -11,13 +11,11 @@ function StatementList(props) {
 	const statements = useSelector((state) => state.statements.statements);
 	const dispatch = useDispatch();
 	const { author, category, query, page } = useParams();
-	useEffect(() => dispatch(getStatements(category, author, query, page)), [
-		dispatch,
-		author,
-		category,
-		query,
-		page,
-	]);
+	useEffect(() => {
+		dispatch(getStatements(category, author, query, page));
+		for (let i = window.scrollY; i > 0; i--)
+			window.setTimeout(() => window.scrollTo(0, i), 100);
+	}, [dispatch, author, category, query, page]);
 	return (
 		<div className="container">
 			<div className="right-container">

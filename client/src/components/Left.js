@@ -8,7 +8,12 @@ function Left() {
 			<div className="left-widget input">
 				<p>Find statement</p>
 				<div>
-					<input type="text" onChange={(e) => setQuery(e.target.value)} />
+					<label htmlFor="search">Search post</label>
+					<input
+						type="text"
+						id="search"
+						onChange={(e) => setQuery(e.target.value)}
+					/>
 					<Link to={query ? `/search/${query}/` : ''}>
 						<button>Search</button>
 					</Link>
@@ -17,7 +22,8 @@ function Left() {
 			<div className="left-widget input">
 				<p>Subscribe on news</p>
 				<div>
-					<input type="text" placeholder="Email" />
+					<label htmlFor="subscribe">subscribe</label>
+					<input id="subscribe" type="text" placeholder="Email" />
 					<button>Subscribe</button>
 				</div>
 			</div>

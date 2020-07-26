@@ -17,6 +17,7 @@
 	flex: 1;
 	display: flex;
 	padding: 5px;
+	list-style: none;
 }
 
 .menu-item {
@@ -634,4 +635,8 @@ input.categories {
 
 .statement-content {
 	padding-bottom: 20px;
+}
+
+ul {
+	margin: 0;
 }

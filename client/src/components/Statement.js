@@ -42,7 +42,7 @@ function Statement(props) {
 			<div className="statement single">
 				<p className="statement-title">{title}</p>
 				<p className="statement-type">{category}</p>
-				<img className="statement-image-full" alt="" src={`http://${image}`} />
+				<img className="statement-image-full" alt="" src={`${image}`} />
 				<p className="statement-description">{description}</p>
 				<div
 					className="statement-content"

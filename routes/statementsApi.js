@@ -3,8 +3,10 @@
 const express = require('express');
 const Sequelize = require('sequelize');
 const Statements = require('../models/statements');
+const Images = require('../models/images');
 const Rating = require('../models/rating');
 const router = express.Router();
+const sharp = require('sharp');
 
 router.get('/category/', (req, res) => {
 	Statements.findAll({
@@ -17,9 +19,36 @@ router.get('/category/', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-	Statements.create(req.body)
-		.then((data) => res.status(200).json(data))
-		.catch((err) => res.status(400).send({ msg: 'Something went wrong', err }));
+	const { author, category, content, description, image, title } = req.body;
+	const imageName = image.split('api/images/')[1];
+	sharp(`uploads/${imageName}`)
+		.resize({ height: 400 })
+		.toFile(`uploads/min${imageName}`)
+		.then((data) => {
+			Images.findOrCreate({
+				where: {
+					name: `min${imageName}`,
+					author: 'system',
+				},
+			}).then(() => {
+				Statements.create({
+					author,
+					category,
+					content,
+					description,
+					image: image.replace(
+						image.split('api/images/')[1],
+						`min${imageName}`
+					),
+					title,
+				})
+					.then((data) => res.status(200).json(data))
+					.catch((err) =>
+						res.status(400).send({ msg: 'Something went wrong', err })
+					);
+			});
+		})
+		.catch((err) => console.log(err));
 });
 
 router.get('/statement/:id', (req, res) => {
