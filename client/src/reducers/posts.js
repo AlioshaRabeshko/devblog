@@ -5,6 +5,7 @@ import {
 	DELETE_POST,
 	GET_CATEGORIES,
 	GET_RATE,
+	EDIT_STATEMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -32,6 +33,11 @@ export default function (state = initialState, action) {
 				...state,
 				rate: action.payload,
 			};
+		case EDIT_STATEMENT:
+			return {
+				...state,
+				post: action.payload,
+			};
 		case GET_CATEGORIES:
 			return {
 				...state,
@@ -40,7 +46,7 @@ export default function (state = initialState, action) {
 		case ADD_POST:
 			return {
 				...state,
-				statement: action.payload,
+				post: action.payload,
 			};
 		case DELETE_POST:
 			return {

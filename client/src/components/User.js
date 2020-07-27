@@ -5,12 +5,13 @@ import Gallery from './Gallery';
 import { EditorContext } from '../context/editor';
 import { addPost, getCategories } from '../actions/posts';
 import { logOut } from '../actions/users';
+import { useHistory } from 'react-router-dom';
 
 function User(props) {
 	const user = useSelector((state) => state.user.user.user);
 	const { categories } = useSelector((state) => state.posts);
-	// console.log(categories);
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const [tab, setTab] = useState({ one: true, two: false, three: false });
 	const [title, setTitle] = useState(null);
 	const [image, setImage] = useState(null);
@@ -22,7 +23,7 @@ function User(props) {
 	function logOut_local() {
 		localStorage.setItem('user', null);
 		localStorage.setItem('token', null);
-		dispatch(logOut());
+		dispatch(logOut(() => history.push('/sign')));
 	}
 
 	useEffect(() => dispatch(getCategories()), [dispatch]);
@@ -45,14 +46,17 @@ function User(props) {
 			return;
 		}
 		dispatch(
-			addPost({
-				title,
-				category,
-				description,
-				image,
-				content,
-				author: user.shortName,
-			})
+			addPost(
+				{
+					title,
+					category,
+					description,
+					image,
+					content,
+					author: user.shortName,
+				},
+				history
+			)
 		);
 	}
 	return (

@@ -40,7 +40,7 @@ router.post('/check', (req, res) => {
 		if (err) return res.status(401).send(err);
 		try {
 			const { id, name, shortName, verified } = await Users.findOne({
-				where: { email: decoded.data.email },
+				where: { email: decoded.user.email },
 			});
 			return res.status(202).send({
 				token: req.body.token,

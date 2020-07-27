@@ -15,7 +15,8 @@ export const logIn = (data) => (dispatch) => {
 	});
 };
 
-export const logOut = () => (dispatch) => {
+export const logOut = (cb) => (dispatch) => {
+	cb();
 	dispatch({
 		type: LOG_OUT,
 		payload: { token: null, user: null },

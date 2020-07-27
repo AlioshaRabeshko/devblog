@@ -630,6 +630,7 @@ button:focus {
 
 input.categories {
 	width: 40%;
+	padding: 5px;
 }
 
 .post-content {
@@ -647,4 +648,36 @@ ul {
 
 .text-center {
 	text-align: center;
+}
+
+.moder-section {
+	display: flex;
+	flex-direction: row;
+}
+
+.verify {
+	display: flex;
+	flex-direction: row;
+}
+
+.moder-section div {
+	width: 50%;
+}
+
+.moder-section button {
+	width: 90%;
+	font-size: medium;
+	border: none;
+	padding: 10px;
+	background-color: #e7e7e7;
+	margin-bottom: 2px;
+}
+
+.moder-section button:hover {
+	color: rgb(197, 14, 14);
+}
+
+.moder-section .sign-button {
+	margin: 0 0 2px 0;
+	padding: 10px;
 }

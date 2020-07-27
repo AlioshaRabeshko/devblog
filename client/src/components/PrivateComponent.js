@@ -1,14 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-function PrivateComponent(component, perm, ...rest) {
+function PrivateComponent({ perm, ...rest }) {
 	const { user } = useSelector((state) => state.user.user);
-	return (
-		<Route
-			{...rest}
-			render={(props) => (token ? <Component {...props} /> : <div></div>)}
-		/>
-	);
+	return user && user.verified >= perm ? <div {...rest}></div> : <div />;
 }
 
 export default PrivateComponent;

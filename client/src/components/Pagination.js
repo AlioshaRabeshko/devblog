@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 
 function Pagination(props) {
 	const arr = [];
-
 	const pages = Math.ceil(props.count / 7);
 	for (let i = 1; i < pages - 1; i++) arr.push(i);
-	if (pages === 1 || !props.count) return <ul className="pagination"></ul>;
+	if (pages === 1 || !props.count) return <ul className="pagination" />;
 	return (
 		<ul className="pagination">
 			<li>

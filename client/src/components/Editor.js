@@ -3,12 +3,13 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useEditor } from '../context/editor';
 
 function TextEditor() {
-	const { setContent } = useEditor();
+	const { content, setContent } = useEditor();
 	function handleEditorChange(content, editor) {
 		setContent(content);
 	}
 	return (
 		<Editor
+			value={content}
 			apiKey="hcnwhdxlemckajk9mdxkg4k04eqi1vk1lmpzr6d1qjsandxi"
 			init={{
 				menubar: true,

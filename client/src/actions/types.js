@@ -12,3 +12,4 @@ export const PUT_LIKE = 'PUT_LIKE';
 export const PUT_DISLIKE = 'PUT_DISLIKE';
 export const GET_RATE = 'GET_RATE';
 export const LOG_OUT = 'LOG_OUT';
+export const EDIT_STATEMENT = 'EDIT_STATEMENT';

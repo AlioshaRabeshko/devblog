@@ -4,6 +4,7 @@ const express = require('express');
 const Sequelize = require('sequelize');
 const Posts = require('../models/posts');
 const Users = require('../models/users');
+const DeletedPosts = require('../models/deletedPosts');
 const Images = require('../models/images');
 const Rating = require('../models/rating');
 const router = express.Router();
@@ -29,24 +30,28 @@ router.post('/add', async (req, res) => {
 			attributes: ['verified'],
 			where: { shortName: author },
 		});
-		const imageName = image.split('api/images/')[1];
-		await sharp(`uploads/${imageName}`)
-			.resize({ height: 400 })
-			.toFile(`uploads/min${imageName}`);
-		await Images.findOrCreate({
-			where: {
-				name: `min${imageName}`,
-				author: 'system',
-			},
-		});
+		let img = image;
+		if (image.includes('api/images/')) {
+			const imageName = image.split('api/images/')[1];
+			await sharp(`uploads/${imageName}`)
+				.resize({ height: 400 })
+				.toFile(`uploads/min${imageName}`);
+			await Images.findOrCreate({
+				where: {
+					name: `min${imageName}`,
+					author: 'system',
+				},
+			});
+			img = image.replace(image.split('api/images/')[1], `min${imageName}`);
+		}
 		const post = await Posts.create({
 			author,
 			category,
 			content,
 			description,
-			image: image.replace(image.split('api/images/')[1], `min${imageName}`),
+			image: img,
 			title,
-			verified: ver.verified >= 10,
+			verified: ver.verified >= 20,
 		});
 		return res.status(201).json(post);
 	} catch (err) {
@@ -59,7 +64,7 @@ router.get('/post/:id', async (req, res) => {
 		const post = await Posts.findOne({ where: { id: req.params.id } });
 		post.seen++;
 		post.save();
-		return res.status(202).send(data);
+		return res.status(202).send(post);
 	} catch (err) {
 		return res.status(404);
 	}
@@ -67,7 +72,7 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/category/:category/:page', async (req, res) => {
 	try {
-		const data = Posts.findAndCountAll({
+		const data = await Posts.findAndCountAll({
 			order: [['createdAt', 'DESC']],
 			limit: 7,
 			offset: +req.params.page * 7,
@@ -186,49 +191,51 @@ router.get('/:page', async (req, res) => {
 
 router.put('/verify/:id', async (req, res) => {
 	try {
-		const verifier = await Users.findOne({
-			attributes: ['verified'],
-			where: { id: req.body.verifier },
-		});
-	} catch (err) {
-		return res.status(404);
-	}
-	if (verifier.verified <= 50) return req.status(403);
-	try {
-		const post = await Posts.findOne({
-			attributes: ['verified', 'author'],
-			where: { id: req.params.id },
-		});
+		const verifier = await Users.findOne({ where: { id: req.body.userId } });
+		if (verifier.verified <= 50) return req.status(403);
+		const post = await Posts.findOne({ where: { id: req.params.id } });
 		post.verified = true;
 		post.save();
-		const author = await Users.findOne({
-			attributes: ['verified'],
-			where: { shortName: post.author },
-		});
+		const author = await Users.findOne({ where: { shortName: post.author } });
 		author.verified++;
 		author.save();
-		return res.status(202);
+		return res.status(202).send(post);
 	} catch (err) {
 		return res.status(404);
 	}
 });
 
-router.delete('/verify/delete/:id', async (req, res) => {
+router.put('/edit/:id', async (req, res) => {
 	try {
+		const verifier = await Users.findOne({ where: { id: req.body.userId } });
+		if (verifier.verified <= 50) return req.status(403);
 		const post = await Posts.findOne({ where: { id: req.params.id } });
-		await post.destroy();
-		return res.status(200);
+		for (let key in req.body.data)
+			if (req.body.data[key] !== null) post[key] = req.body.data[key];
+		post.save();
+		return res.status(202).send(post);
 	} catch (err) {
-		return res.status(400);
+		return res.status(404).send({ msg: 'no posts' });
 	}
 });
 
-router.get('/verify', async (req, res) => {
+router.delete('/:userName/:id', async (req, res) => {
 	try {
-		const posts = await Posts.findAll({ where: { verified: false } });
-		return res.status(302).send(posts);
+		const post = await Posts.findOne({ where: { id: req.params.id } });
+		const { author, category, content, description, image, title } = post;
+		await DeletedPosts.create({
+			author,
+			category,
+			content,
+			description,
+			image,
+			title,
+			deletedBy: req.params.userName,
+		});
+		post.destroy();
+		return res.status(200);
 	} catch (err) {
-		return res.status(404).send({ msg: 'no posts' });
+		return res.status(404);
 	}
 });
 

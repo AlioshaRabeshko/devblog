@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uploadImages, getImages } from '../actions/images';
 
 function Gallery() {
-	const user = useSelector((state) => state.user.user.user);
+	const user = useSelector((state) => state.user.user);
 	const images = useSelector((state) => state.images.images);
 	const dispatch = useDispatch();
 	function uploadImg(e) {

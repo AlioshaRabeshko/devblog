@@ -3,10 +3,19 @@ import likeSvg from '../svgs/like.svg';
 import dislikeSvg from '../svgs/dislike.svg';
 import see from '../svgs/seen.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPost, getRate, putLike, putDislike } from '../actions/posts';
-import { Redirect } from 'react-router-dom';
+import {
+	getPost,
+	getRate,
+	putLike,
+	putDislike,
+	verify,
+	deletePost,
+} from '../actions/posts';
+import { Redirect, Link, useHistory } from 'react-router-dom';
+import PrivateComponent from './PrivateComponent';
 
 function Post(props) {
+	const history = useHistory();
 	const user = useSelector((state) => state.user.user);
 	const { post, rate } = useSelector((state) => state.posts);
 	const dispatch = useDispatch();
@@ -43,7 +52,35 @@ function Post(props) {
 					className="post-content"
 					dangerouslySetInnerHTML={{
 						__html: content ? content : '',
-					}}></div>
+					}}
+				/>
+				<div className="moder-section">
+					{!post.verified ? (
+						<div className="verify">
+							<PrivateComponent perm={50}>
+								<button onClick={() => history.push(`/`)}>Decline</button>
+							</PrivateComponent>
+							<PrivateComponent perm={50}>
+								<button onClick={() => dispatch(verify(id, user.user.id))}>
+									Accept
+								</button>
+							</PrivateComponent>
+						</div>
+					) : (
+						<div />
+					)}
+					<PrivateComponent perm={50}>
+						<Link className="sign-button" to={`/edit/${id}`}>
+							Edit
+						</Link>
+					</PrivateComponent>
+					<PrivateComponent perm={50}>
+						<button
+							onClick={() => dispatch(deletePost(id, user.user.shortName))}>
+							Delete
+						</button>
+					</PrivateComponent>
+				</div>
 				<div className="post-footer">
 					<p className="post-date">{createdAt.split('T')[0]}</p>
 					<div className="footer-element">
@@ -62,7 +99,7 @@ function Post(props) {
 			</div>
 		);
 	}
-	return <div></div>;
+	return <div />;
 }
 
 export default Post;
