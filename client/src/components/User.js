@@ -4,11 +4,11 @@ import Editor from './Editor';
 import Gallery from './Gallery';
 import { EditorContext } from '../context/editor';
 import { addPost, getCategories } from '../actions/posts';
-import { logOut } from '../actions/users';
+import { logOut, getSubs, setSub, setStatus } from '../actions/users';
 import { useHistory } from 'react-router-dom';
 
 function User(props) {
-	const user = useSelector((state) => state.user.user.user);
+	const { user, subs } = useSelector((state) => state.user);
 	const { categories } = useSelector((state) => state.posts);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -18,6 +18,7 @@ function User(props) {
 	const [description, setDescription] = useState(null);
 	const [content, setContent] = useState(null);
 	const [category, setCategory] = useState(null);
+	const [status_local, setStatus_local] = useState('');
 	const [warn, setWarn] = useState('');
 
 	function logOut_local() {
@@ -26,7 +27,12 @@ function User(props) {
 		dispatch(logOut(() => history.push('/sign')));
 	}
 
-	useEffect(() => dispatch(getCategories()), [dispatch]);
+	useEffect(() => {
+		dispatch(getCategories());
+		dispatch(getSubs());
+	}, [dispatch]);
+
+	useEffect(() => setStatus_local(user.user.status), [user]);
 
 	function submitPost() {
 		if (!title) {
@@ -53,7 +59,7 @@ function User(props) {
 					description,
 					image,
 					content,
-					author: user.shortName,
+					author: user.user.shortName,
 				},
 				history
 			)
@@ -88,6 +94,65 @@ function User(props) {
 				<label htmlFor="tab-btn-3">Gallery</label>
 
 				<div id="content-1">
+					<div className="user-page">
+						<div className="user-block">
+							<p className="user-name">{user.user.name}</p>
+							<p
+								className="user-status"
+								contentEditable
+								onInput={(e) => setStatus_local(e.target.textContent)}
+								suppressContentEditableWarning={true}>
+								{user.user.status}
+							</p>
+							{user.user.status !== status_local ? (
+								<button
+									className="sign-button"
+									onClick={() => dispatch(setStatus(status_local))}>
+									Save
+								</button>
+							) : (
+								<div />
+							)}
+							<div className="categories">
+								{subs.map((el, id) => (
+									<div key={id}>
+										<input
+											type="checkbox"
+											id={el}
+											defaultChecked={true}
+											onClick={(e) => dispatch(setSub(e.target.id))}
+										/>
+										<label htmlFor={el}>{el}</label>
+									</div>
+								))}
+								{categories
+									.filter((el) => subs.indexOf(el) === -1)
+									.map((el, id) => (
+										<div key={id}>
+											<input
+												type="checkbox"
+												name={el}
+												id={el}
+												value="a1"
+												onClick={(e) => dispatch(setSub(e.target.id))}
+											/>
+											<label htmlFor={el}>{el}</label>
+										</div>
+									))}
+							</div>
+						</div>
+						<div className="user-block">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
+							semper urna. Nullam lobortis vestibulum tellus vel vulputate. In
+							vehicula, turpis ut sollicitudin facilisis, lectus tellus
+							ullamcorper ligula, quis accumsan ligula massa id diam. Vivamus a
+							nibh ac orci tristique malesuada ac ac felis. In scelerisque lacus
+							ac lorem hendrerit, et bibendum purus hendrerit. Etiam sit amet
+							lacus fermentum, tempus justo quis, hendrerit est. Nunc vitae ex a
+							risus dictum pretium vel vitae dolor.
+						</div>
+					</div>
+
 					<button className="sign-button upload-button" onClick={logOut_local}>
 						Log Out
 					</button>
@@ -119,7 +184,7 @@ function User(props) {
 							<datalist id="categories">
 								{categories.map((el, id) => (
 									<option key={id} className="select-item">
-										{el.category}
+										{el}
 									</option>
 								))}
 							</datalist>

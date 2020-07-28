@@ -5,19 +5,17 @@ const Sequelize = require('sequelize');
 const Posts = require('../models/posts');
 const Users = require('../models/users');
 const DeletedPosts = require('../models/deletedPosts');
-const Images = require('../models/images');
 const Rating = require('../models/rating');
 const router = express.Router();
-const sharp = require('sharp');
 
 router.get('/category/', async (req, res) => {
 	try {
-		const category = await Posts.findAll({
+		const categories = await Posts.findAll({
 			attributes: [
 				[Sequelize.fn('DISTINCT', Sequelize.col('category')), 'category'],
 			],
 		});
-		return res.status(200).send(category);
+		return res.status(200).send(categories.map((el) => el.category));
 	} catch (err) {
 		return res.status(404);
 	}
@@ -30,32 +28,18 @@ router.post('/add', async (req, res) => {
 			attributes: ['verified'],
 			where: { shortName: author },
 		});
-		let img = image;
-		if (image.includes('api/images/')) {
-			const imageName = image.split('api/images/')[1];
-			await sharp(`uploads/${imageName}`)
-				.resize({ height: 400 })
-				.toFile(`uploads/min${imageName}`);
-			await Images.findOrCreate({
-				where: {
-					name: `min${imageName}`,
-					author: 'system',
-				},
-			});
-			img = image.replace(image.split('api/images/')[1], `min${imageName}`);
-		}
 		const post = await Posts.create({
 			author,
 			category,
 			content,
 			description,
-			image: img,
+			image,
 			title,
 			verified: ver.verified >= 20,
 		});
 		return res.status(201).json(post);
 	} catch (err) {
-		return res.status(400);
+		return res.status(404);
 	}
 });
 
@@ -121,8 +105,8 @@ router.get('/search/:query/:page', async (req, res) => {
 			el.title.toLowerCase().includes(req.params.query.toLowerCase())
 		);
 		const count = arr.length;
-		arr.splice(req.params.page * 7, 7);
-		return res.status(200).send({ count, rows: arr });
+		const result = arr.splice(req.params.page * 7, 7);
+		return res.status(200).send({ count, rows: result });
 	} catch (err) {
 		res.status(400);
 	}

@@ -36,6 +36,7 @@ const Users = db.define(
 		},
 		status: {
 			type: Sequelize.STRING,
+			defaultValue: '',
 		},
 		verified: {
 			type: Sequelize.INTEGER,

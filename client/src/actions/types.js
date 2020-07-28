@@ -13,3 +13,6 @@ export const PUT_DISLIKE = 'PUT_DISLIKE';
 export const GET_RATE = 'GET_RATE';
 export const LOG_OUT = 'LOG_OUT';
 export const EDIT_STATEMENT = 'EDIT_STATEMENT';
+export const GET_SUBS = 'GET_SUBS';
+export const SET_STATUS = 'SET_STATUS';
+export const SET_SUB = 'SET_SUB';

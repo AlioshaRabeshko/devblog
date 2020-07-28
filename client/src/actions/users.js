@@ -1,4 +1,12 @@
-import { LOG_IN, SIGN_UP, CHECK_AUTH, LOG_OUT } from './types';
+import {
+	LOG_IN,
+	SIGN_UP,
+	CHECK_AUTH,
+	LOG_OUT,
+	GET_SUBS,
+	SET_SUB,
+	SET_STATUS,
+} from './types';
 
 import axios from 'axios';
 
@@ -41,4 +49,28 @@ export const check = (token) => (dispatch) => {
 			payload: res.data,
 		});
 	});
+};
+
+export const getSubs = () => (dispatch) => {
+	const userId = JSON.parse(localStorage.getItem('user')).id;
+	axios.get(`/api/users/settings/${userId}`).then((res) =>
+		dispatch({
+			type: GET_SUBS,
+			payload: res.data,
+		})
+	);
+};
+
+export const setStatus = (status) => (dispatch) => {
+	const userId = JSON.parse(localStorage.getItem('user')).id;
+	axios
+		.put(`/api/users/settings/${userId}`, { status })
+		.then((res) => dispatch({ type: SET_STATUS, payload: res.data }));
+};
+
+export const setSub = (sub) => (dispatch) => {
+	const userId = JSON.parse(localStorage.getItem('user')).id;
+	axios
+		.put(`/api/users/settings/${sub}/${userId}`)
+		.then((res) => dispatch({ type: SET_SUB }));
 };
