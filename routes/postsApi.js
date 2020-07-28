@@ -78,11 +78,8 @@ router.get('/author/:name/:page', async (req, res) => {
 	try {
 		const data = await Posts.findAndCountAll({
 			order: [['createdAt', 'DESC']],
-			limit: 7,
-			offset: +req.params.page * 7,
 			where: {
 				author: req.params.name,
-				verified: true,
 			},
 			raw: true,
 		});

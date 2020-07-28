@@ -22,11 +22,9 @@ function PostList(props) {
 				{posts.rows[0] ? <WidePost post={posts.rows[0]} /> : <WidePost />}
 			</div>
 			<Left />
-			{posts.rows[0]
-				? posts.rows.map((el, id) =>
-						id !== 0 ? <NarrowPost post={el} key={id} /> : ''
-				  )
-				: ''}
+			{posts.rows.map((el, id) =>
+				id !== 0 ? <NarrowPost post={el} key={id} /> : ''
+			)}
 			{posts.rows % 2 !== 0 ? <NarrowPost /> : ''}
 			<Pagination count={posts.count} />
 		</div>

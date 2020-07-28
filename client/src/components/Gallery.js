@@ -3,16 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uploadImages, getImages } from '../actions/images';
 
 function Gallery() {
-	const user = useSelector((state) => state.user.user);
+	const { user } = useSelector((state) => state.user.user);
 	const images = useSelector((state) => state.images.images);
 	const dispatch = useDispatch();
-	function uploadImg(e) {
-		dispatch(uploadImages(e.target.files, user.shortName));
+	function uploadImg(e, name) {
+		dispatch(uploadImages(e.target.files, name));
 	}
-	useEffect(() => dispatch(getImages(user.shortName)), [
-		dispatch,
-		user.shortName,
-	]);
+	useEffect(() => dispatch(getImages(user.shortName)), [dispatch, user]);
 	function copyToClipboard(link) {
 		const textField = document.createElement('textarea');
 		textField.innerText = link;
@@ -31,7 +28,7 @@ function Gallery() {
 					name="img"
 					accept="image/*"
 					multiple
-					onChange={uploadImg}
+					onChange={(e) => uploadImg(e, user.shortName)}
 				/>
 				<label htmlFor="img">Choose images to upload</label>
 				<p className="or">Or upload from URL</p>

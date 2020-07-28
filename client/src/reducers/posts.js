@@ -13,6 +13,18 @@ const initialState = {
 		count: 0,
 		rows: [],
 	},
+	post: {
+		id: 0,
+		title: '',
+		category: '',
+		image: '',
+		description: '',
+		content: '',
+		author: '',
+		seen: 0,
+		verified: false,
+		createdAt: '',
+	},
 	categories: [],
 };
 

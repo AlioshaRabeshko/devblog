@@ -51,8 +51,7 @@ export const check = (token) => (dispatch) => {
 	});
 };
 
-export const getSubs = () => (dispatch) => {
-	const userId = JSON.parse(localStorage.getItem('user')).id;
+export const getSubs = (userId) => (dispatch) => {
 	axios.get(`/api/users/settings/${userId}`).then((res) =>
 		dispatch({
 			type: GET_SUBS,
@@ -61,15 +60,13 @@ export const getSubs = () => (dispatch) => {
 	);
 };
 
-export const setStatus = (status) => (dispatch) => {
-	const userId = JSON.parse(localStorage.getItem('user')).id;
+export const setStatus = (status, userId) => (dispatch) => {
 	axios
 		.put(`/api/users/settings/${userId}`, { status })
 		.then((res) => dispatch({ type: SET_STATUS, payload: res.data }));
 };
 
-export const setSub = (sub) => (dispatch) => {
-	const userId = JSON.parse(localStorage.getItem('user')).id;
+export const setSub = (sub, userId) => (dispatch) => {
 	axios
 		.put(`/api/users/settings/${sub}/${userId}`)
 		.then((res) => dispatch({ type: SET_SUB }));
