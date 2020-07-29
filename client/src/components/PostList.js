@@ -8,9 +8,9 @@ import { getPosts } from '../actions/posts';
 import { useParams } from 'react-router-dom';
 
 function PostList(props) {
-	const posts = useSelector((state) => state.posts.posts);
-	const dispatch = useDispatch();
+	const { posts } = useSelector((state) => state.posts);
 	const { author, category, query, page } = useParams();
+	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getPosts(category, author, query, page));
 		for (let i = window.scrollY; i > 0; i--)

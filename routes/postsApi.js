@@ -109,50 +109,6 @@ router.get('/search/:query/:page', async (req, res) => {
 	}
 });
 
-router.put('/like/:id', async (req, res) => {
-	try {
-		const [rating, created] = await Rating.findOrCreate({
-			where: { postId: req.params.id, userId: req.body.userId },
-			defaults: { rate: 'like' },
-		});
-		rating.rate = 'like';
-		rating.save();
-		return res.status(created ? 201 : 202).send(rating);
-	} catch (err) {
-		return res.status(400);
-	}
-});
-
-router.put('/dislike/:id', async (req, res) => {
-	try {
-		const [rating, created] = await Rating.findOrCreate({
-			where: { postId: req.params.id, userId: req.body.userId },
-			defaults: { rate: 'dislike' },
-		});
-		rating.rate = 'dislike';
-		rating.save();
-		return res.status(created ? 201 : 202).send(rating);
-	} catch (err) {
-		return res.status(400);
-	}
-});
-
-router.get('/rate/:id', async (req, res) => {
-	try {
-		const likes = await Rating.findAndCountAll({
-			where: { postId: req.params.id, rate: 'like' },
-		});
-		const dislikes = await Rating.findAndCountAll({
-			where: { postId: req.params.id, rate: 'dislike' },
-		});
-		return res
-			.status(200)
-			.send({ likes: likes.count, dislikes: dislikes.count });
-	} catch (err) {
-		return res.status(404);
-	}
-});
-
 router.get('/:page', async (req, res) => {
 	try {
 		const posts = await Posts.findAndCountAll({

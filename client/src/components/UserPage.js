@@ -7,9 +7,9 @@ import { useHistory, Link } from 'react-router-dom';
 function User() {
 	const { user, subs } = useSelector((state) => state.user);
 	const { categories, posts } = useSelector((state) => state.posts);
+	const [statusLocal, setStatusLocal] = useState('');
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [status_local, setStatus_local] = useState('');
 
 	function logOut_local() {
 		localStorage.setItem('user', null);
@@ -22,7 +22,7 @@ function User() {
 	useEffect(() => {
 		dispatch(getSubs(user.user.id));
 		dispatch(getPosts(null, user.user.shortName));
-		setStatus_local(user.user.status);
+		setStatusLocal(user.user.status);
 	}, [user, dispatch]);
 
 	return (
@@ -32,14 +32,14 @@ function User() {
 				<p
 					className="user-status"
 					contentEditable
-					onInput={(e) => setStatus_local(e.target.textContent)}
+					onInput={(e) => setStatusLocal(e.target.textContent)}
 					suppressContentEditableWarning={true}>
 					{user.user.status}
 				</p>
-				{user.user.status !== status_local ? (
+				{user.user.status !== statusLocal ? (
 					<button
 						className="sign-button"
-						onClick={() => dispatch(setStatus(status_local, user.user.id))}>
+						onClick={() => dispatch(setStatus(statusLocal, user.user.id))}>
 						Save
 					</button>
 				) : (

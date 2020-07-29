@@ -26,14 +26,11 @@ function Edit() {
 		if (image !== post.image) obj.image = image;
 		if (category !== post.category) obj.category = category;
 		if (description !== post.description) obj.description = description;
-		console.log(user);
-		dispatch(
-			editPost(post.id, user.user.id, obj, () => history.push(`/post/${id}`))
-		);
+		dispatch(editPost(id, user.id, obj, () => history.push(`/post/${id}`)));
 	}
 	if (user.verified <= 50) return <Redirect to={`/post/${id}`} />;
 	return (
-		<div className="post single">
+		<div className="single edit-post">
 			<br />
 			<div className="new-post-inputs">
 				<input

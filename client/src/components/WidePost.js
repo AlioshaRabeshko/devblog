@@ -13,7 +13,7 @@ function WideStatement(props) {
 	return (
 		<div className="wide-post post">
 			<p className="post-title">
-				<Link to={{ pathname: `/post/${id}`, post: props.post }} as="a">
+				<Link to={`/post/${id}`} as="a">
 					{title}
 				</Link>
 			</p>

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signUp, logIn } from '../actions/users';
 
 function Login() {
-	const auth = useSelector((state) => state.user.user);
+	const { token } = useSelector((state) => state.user.user);
 	const dispatch = useDispatch();
 	const [error, setError] = useState('');
 	const [email, setEmail] = useState('Leflylll@gmail.com');
@@ -48,7 +48,7 @@ function Login() {
 		);
 	}
 
-	if (auth.token) {
+	if (token) {
 		return <Redirect to="/user" />;
 	}
 
@@ -89,7 +89,6 @@ function Login() {
 	if (status === 1)
 		return (
 			<div className="sign">
-				{console.log(auth)}
 				<div className="sign-title">
 					<div>
 						<p>Sing Up</p>

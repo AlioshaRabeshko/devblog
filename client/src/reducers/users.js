@@ -14,6 +14,8 @@ const initialState = {
 		user: {
 			name: '',
 			status: '',
+			verified: 0,
+			id: 0,
 		},
 	},
 	subs: [],

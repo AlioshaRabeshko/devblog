@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function PrivateRoute({ component: Component, to, ...rest }) {
-	const token = JSON.parse(localStorage.getItem('token'));
+	const { token } = useSelector((state) => state.user.user);
 	return (
 		<Route
 			{...rest}

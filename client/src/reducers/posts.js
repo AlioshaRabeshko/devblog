@@ -4,7 +4,6 @@ import {
 	ADD_POST,
 	DELETE_POST,
 	GET_CATEGORIES,
-	GET_RATE,
 	EDIT_STATEMENT,
 } from '../actions/types';
 
@@ -39,11 +38,6 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				post: action.payload,
-			};
-		case GET_RATE:
-			return {
-				...state,
-				rate: action.payload,
 			};
 		case EDIT_STATEMENT:
 			return {

@@ -172,7 +172,7 @@ a:hover,
 
 @media all and (max-width: 699px) {
 	.container {
-		width: 100%;
+		width: 95%;
 	}
 
 	.top {
@@ -234,7 +234,7 @@ a:hover,
 	}
 }
 
-@media all and (max-width: 543px) {
+@media all and (max-width: 572px) {
 	.sign-title {
 		height: 95px !important;
 	}
@@ -764,4 +764,16 @@ ul {
 
 .article {
 	height: 20px;
+}
+
+.rated {
+	filter: invert(19%) sepia(94%) saturate(2525%) hue-rotate(353deg)
+		brightness(83%) contrast(100%);
+}
+
+.edit-post {
+	background-color: #fff;
+	padding: 20px;
+	box-shadow: 0 0 5px rgb(44, 46, 54);
+	width: 90%;
 }

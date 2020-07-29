@@ -7,7 +7,7 @@ function WidePost(props) {
 	return (
 		<div className="narrow-post post">
 			<p className="post-title">
-				<Link to={{ pathname: `/post/${id}`, post: props.post }} as="a">
+				<Link to={`/post/${id}`} as="a">
 					{title}
 				</Link>
 			</p>
