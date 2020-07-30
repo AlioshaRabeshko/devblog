@@ -109,6 +109,15 @@ router.get('/search/:query/:page', async (req, res) => {
 	}
 });
 
+router.get('/verify', async (req, res) => {
+	try {
+		const posts = await Posts.findAll({ where: { verified: false } });
+		return res.status(202).send(posts);
+	} catch (err) {
+		return res.status(404);
+	}
+});
+
 router.get('/:page', async (req, res) => {
 	try {
 		const posts = await Posts.findAndCountAll({
@@ -170,7 +179,7 @@ router.delete('/:userName/:id', async (req, res) => {
 			deletedBy: req.params.userName,
 		});
 		post.destroy();
-		return res.status(200);
+		return res.status(200).send('done');
 	} catch (err) {
 		return res.status(404);
 	}

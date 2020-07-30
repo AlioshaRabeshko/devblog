@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Pagination({ count }) {
 	const pages = Math.ceil(count / 7);
 	const links = new Array(pages).fill(0);
-	if (pages === 1) return <ul className="pagination" />;
+	if (pages <= 1) return <ul className="pagination" />;
 	return (
 		<ul className="pagination">
 			<li>

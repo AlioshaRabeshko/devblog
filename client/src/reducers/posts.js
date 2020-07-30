@@ -5,6 +5,7 @@ import {
 	DELETE_POST,
 	GET_CATEGORIES,
 	EDIT_STATEMENT,
+	GET_UNVERIFIED,
 } from '../actions/types';
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
 		createdAt: '',
 	},
 	categories: [],
+	unverified: [],
 };
 
 export default function (state = initialState, action) {
@@ -48,6 +50,11 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				categories: action.payload,
+			};
+		case GET_UNVERIFIED:
+			return {
+				...state,
+				unverified: action.payload,
 			};
 		case ADD_POST:
 			return {
