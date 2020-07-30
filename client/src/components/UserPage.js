@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, getPosts, getUnverified } from '../actions/posts';
 import { logOut, getSubs, setSub, setStatus } from '../actions/users';
 import { useHistory, Link } from 'react-router-dom';
-import PrivateComponent from './PrivateComponent';
 
 function User() {
 	const { user, subs } = useSelector((state) => state.user);

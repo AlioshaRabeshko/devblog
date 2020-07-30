@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const Posts = require('../models/posts');
 const Users = require('../models/users');
 const DeletedPosts = require('../models/deletedPosts');
-const Rating = require('../models/rating');
+const History = require('../models/postsHistory');
 const router = express.Router();
 
 router.get('/category/', async (req, res) => {
@@ -156,6 +156,17 @@ router.put('/edit/:id', async (req, res) => {
 		const verifier = await Users.findOne({ where: { id: req.body.userId } });
 		if (verifier.verified <= 50) return req.status(403);
 		const post = await Posts.findOne({ where: { id: req.params.id } });
+		await History.create({
+			postId: post.id,
+			title: post.title,
+			category: post.category,
+			image: post.image,
+			description: post.description,
+			content: post.content,
+			seen: post.seen,
+			verified: post.verified,
+			editor: verifier.shortName,
+		});
 		for (let key in req.body.data)
 			if (req.body.data[key] !== null) post[key] = req.body.data[key];
 		post.save();

@@ -73,8 +73,6 @@ function Edit() {
 			<EditorContext.Provider value={{ content: post.content, setContent }}>
 				<Editor />
 			</EditorContext.Provider>
-			{/* <p className="sign-error text-center">{warn}</p> */}
-			<button className="sign-button upload-button">Delete</button>
 			<button className="sign-button upload-button" onClick={applyEdit}>
 				Save
 			</button>

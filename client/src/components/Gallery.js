@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImages, getImages } from '../actions/images';
+import { uploadImages, getImages, uploadFromLink } from '../actions/images';
 
 function Gallery() {
 	const { user } = useSelector((state) => state.user.user);
 	const images = useSelector((state) => state.images.images);
+	const [imageUrl, setImageUrl] = useState('');
 	const dispatch = useDispatch();
 	function uploadImg(e, name) {
 		dispatch(uploadImages(e.target.files, name));
@@ -32,8 +33,18 @@ function Gallery() {
 				/>
 				<label htmlFor="img">Choose images to upload</label>
 				<p className="or">Or upload from URL</p>
-				<input type="text"></input>
-				<button className="sign-button upload-button">Upload</button>
+				<input
+					type="text"
+					onChange={(e) => setImageUrl(e.target.value)}></input>
+				<button
+					className="sign-button upload-button"
+					onClick={() =>
+						imageUrl !== ''
+							? dispatch(uploadFromLink(imageUrl, user.shortName))
+							: console.log('empty')
+					}>
+					Upload
+				</button>
 			</div>
 			{images.images.map((el, id) => (
 				<div

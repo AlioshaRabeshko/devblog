@@ -7,6 +7,6 @@ const sequelize = new Sequelize('devblog', 'devblog', 'qwerty123', {
 	host: 'localhost',
 });
 
-// sequelize.sync({ force: true });
+sequelize.sync();
 
 module.exports = sequelize;

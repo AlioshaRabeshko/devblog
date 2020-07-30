@@ -364,7 +364,7 @@ a:hover,
 
 .post-footer {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	box-shadow: 0 -1px 5px rgb(44, 46, 54);
 	flex-flow: row wrap;
 }

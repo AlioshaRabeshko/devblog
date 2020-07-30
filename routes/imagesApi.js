@@ -6,7 +6,30 @@ const multer = require('multer');
 const fs = require('fs');
 const Images = require('../models/images');
 const path = require('path');
+const request = require('request');
 const sharp = require('sharp');
+
+router.put('/link/:author', (req, res) => {
+	const now = Date.now();
+	request.head(req.body.link, async () => {
+		request(req.body.link)
+			.pipe(fs.createWriteStream(`${now}.jpg`))
+			.on('close', async () => {
+				const obj = {
+					name: `${now}.webp`,
+					author: req.params.author,
+				};
+				Images.create(obj);
+				await sharp(`${now}.jpg`)
+					.resize({ width: 1150 })
+					.toFile(`uploads/${now}.webp`);
+				fs.unlink(`${now}.jpg`, (err) => {
+					console.log(err);
+				});
+				res.json({ images: [obj], host: req.hostname });
+			});
+	});
+});
 
 const storage = multer.diskStorage({
 	destination: (req, file, callback) => callback(null, 'uploads'),
@@ -33,7 +56,6 @@ router.post('/upload/:author', upload, (req, res, next) => {
 	}
 	const images = [];
 	files.forEach(async (img, id) => {
-		console.log(img.path);
 		const obj = {
 			name: img.path.split('/')[1].split('.')[0] + '.webp',
 			author: req.params.author,
