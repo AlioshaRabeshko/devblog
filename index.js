@@ -13,6 +13,7 @@ app.use('/api/posts', require('./routes/postsApi'));
 app.use('/api/images', require('./routes/imagesApi'));
 app.use('/api/users', require('./routes/usersApi'));
 app.use('/api/rating', require('./routes/ratingApi'));
+app.use('/api/github', require('./routes/githubApi'));
 app.use(compression());
 
 // app.use(express.static('client/build'));
