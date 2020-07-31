@@ -22,7 +22,6 @@ const History = db.define(
 		},
 		category: {
 			type: Sequelize.STRING,
-			allowNull: false,
 		},
 		image: {
 			type: Sequelize.STRING,

@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getGit } from '../actions/github';
 
 function Left() {
 	const [query, setQuery] = useState(null);
+	const [email, setEmail] = useState(null);
+	const { github } = useSelector((state) => state.github);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getGit());
+	}, [dispatch]);
 	return (
 		<div className="left-container">
 			<div className="left-widget input">
@@ -25,7 +33,14 @@ function Left() {
 					<button>Subscribe</button>
 				</div>
 			</div>
-			<div className="left-widget github">GitHub page...</div>
+			<div className="left-widget github">
+				<p className="large">GitHub</p>
+				<img alt="" src={github.image} />
+				<br />
+				<a href={github.url}>
+					<p className="large">{github.userName}</p>
+				</a>
+			</div>
 		</div>
 	);
 }
