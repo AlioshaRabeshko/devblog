@@ -42,7 +42,6 @@ function Left() {
 				<p>
 					Followers:{github.followers} | Following:{github.following}
 				</p>
-				{/* {console.log(github)} */}
 				{github.repos.map((el, id) => (
 					<a href={el.repoUrl} key={id}>
 						<p className="repo">{el.name}</p>
