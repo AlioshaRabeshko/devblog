@@ -7,11 +7,11 @@ function Pagination({ count }) {
 	if (pages <= 1) return <ul className="pagination" />;
 	return (
 		<ul className="pagination">
-			<li>
+			{/* <li>
 				<Link as="a" to="0">
 					{'<<'}
 				</Link>
-			</li>
+			</li> */}
 			{links.map((el, id) => (
 				<li>
 					<Link as="a" to={`${id}`} key={id}>
@@ -19,11 +19,11 @@ function Pagination({ count }) {
 					</Link>
 				</li>
 			))}
-			<li>
+			{/* <li>
 				<Link as="a" to={`${pages}`} disabled>
 					{'>>'}
 				</Link>
-			</li>
+			</li> */}
 		</ul>
 	);
 }

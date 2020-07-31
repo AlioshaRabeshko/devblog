@@ -337,6 +337,7 @@ a:hover,
 }
 
 .pagination {
+	padding-left: 0;
 	order: 1;
 	flex-basis: 100%;
 	width: 100%;
