@@ -34,19 +34,12 @@ function Left() {
 				</div>
 			</div>
 			<div className="left-widget github">
+				<p className="large">GitHub</p>
 				<img alt="" src={github.image} />
 				<br />
 				<a href={github.url}>
-					<p className="large">GitHub: {github.userName}</p>
+					<p className="large">{github.userName}</p>
 				</a>
-				<p>
-					Followers:{github.followers} | Following:{github.following}
-				</p>
-				{github.repos.map((el, id) => (
-					<a href={el.repoUrl} key={id}>
-						<p className="repo">{el.name}</p>
-					</a>
-				))}
 			</div>
 		</div>
 	);
