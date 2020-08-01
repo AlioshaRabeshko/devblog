@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function WideStatement(props) {
 	if (!props.post) {
@@ -20,7 +22,12 @@ function WideStatement(props) {
 			<p className="post-type">
 				<Link to={`/category/${category}/`}>{category}</Link>
 			</p>
-			<img className="post-image" alt="" src={`${image}`} />
+			<LazyLoadImage
+				className="post-image"
+				effect="blur"
+				alt=""
+				src={`${image}`}
+			/>
 			<p className="post-description">{description}</p>
 			<p className="post-date">{date}</p>
 		</div>

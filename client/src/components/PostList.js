@@ -17,15 +17,19 @@ function PostList(props) {
 			window.setTimeout(() => window.scrollTo(0, i), 100);
 	}, [dispatch, author, category, query, page]);
 	return (
-		<div className="container">
+		<div className="container list-container">
 			<div className="right-container">
-				{posts.rows[0] ? <WidePost post={posts.rows[0]} /> : <WidePost />}
+				<WidePost post={posts.rows[0]} />
 			</div>
 			<Left />
 			{posts.rows.map((el, id) =>
 				id !== 0 ? <NarrowPost post={el} key={id} /> : ''
 			)}
-			{posts.rows % 2 !== 0 ? <NarrowPost /> : ''}
+			{posts.rows.length - 1 < 7 && (posts.rows.length - 1) % 2 !== 0 ? (
+				<NarrowPost />
+			) : (
+				''
+			)}
 			<Pagination count={posts.count} />
 		</div>
 	);

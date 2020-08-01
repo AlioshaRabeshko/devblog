@@ -14,6 +14,7 @@ app.use('/api/images', require('./routes/imagesApi'));
 app.use('/api/users', require('./routes/usersApi'));
 app.use('/api/rating', require('./routes/ratingApi'));
 app.use('/api/github', require('./routes/githubApi'));
+app.use('/api/comments', require('./routes/commentsApi'));
 app.use(compression());
 
 // app.use(express.static('client/build'));

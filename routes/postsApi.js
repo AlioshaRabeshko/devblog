@@ -26,7 +26,7 @@ router.post('/add', async (req, res) => {
 		const { author, category, content, description, image, title } = req.body;
 		const ver = await Users.findOne({
 			attributes: ['verified'],
-			where: { shortName: author },
+			where: { id: author },
 		});
 		const post = await Posts.create({
 			author,
@@ -142,7 +142,7 @@ router.put('/verify/:id', async (req, res) => {
 		const post = await Posts.findOne({ where: { id: req.params.id } });
 		post.verified = true;
 		post.save();
-		const author = await Users.findOne({ where: { shortName: post.author } });
+		const author = await Users.findOne({ where: { id: post.author } });
 		author.verified++;
 		author.save();
 		return res.status(202).send(post);
@@ -165,7 +165,7 @@ router.put('/edit/:id', async (req, res) => {
 			content: post.content,
 			seen: post.seen,
 			verified: post.verified,
-			editor: verifier.shortName,
+			editor: verifier.id,
 		});
 		for (let key in req.body.data)
 			if (req.body.data[key] !== null) post[key] = req.body.data[key];

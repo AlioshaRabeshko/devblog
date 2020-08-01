@@ -7,6 +7,9 @@ import { getPost, verify, deletePost } from '../actions/posts';
 import { getRate, putLike, putDislike } from '../actions/rating';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 import PrivateComponent from './PrivateComponent';
+import Comments from './Comments';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Post(props) {
 	const { id } = props.match.params;
@@ -18,6 +21,8 @@ function Post(props) {
 
 	useEffect(() => {
 		dispatch(getPost(id));
+	}, [dispatch, id]);
+	useEffect(() => {
 		dispatch(getRate(id, user.id));
 	}, [dispatch, id, user]);
 	function like() {
@@ -40,7 +45,12 @@ function Post(props) {
 		<div className="post single">
 			<p className="post-title">{title}</p>
 			<p className="post-type">{category}</p>
-			<img className="post-image-full" alt="" src={`${image}`} />
+			<LazyLoadImage
+				className="post-image-full"
+				effect="blur"
+				alt=""
+				src={`${image}`}
+			/>
 			<p className="post-description">{description}</p>
 			<div
 				className="post-content"
@@ -69,8 +79,7 @@ function Post(props) {
 					</Link>
 				</PrivateComponent>
 				<PrivateComponent perm={50}>
-					<button
-						onClick={() => dispatch(deletePost(id, user.shortName, history))}>
+					<button onClick={() => dispatch(deletePost(id, user.id, history))}>
 						Delete
 					</button>
 				</PrivateComponent>
@@ -100,6 +109,7 @@ function Post(props) {
 					<p>{seen}</p>
 				</div>
 			</div>
+			<Comments postAuthor={props.postAuthor} />
 		</div>
 	);
 }

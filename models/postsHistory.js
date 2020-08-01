@@ -35,7 +35,7 @@ const History = db.define(
 			allowNull: false,
 		},
 		editor: {
-			type: Sequelize.STRING,
+			type: Sequelize.INTEGER,
 			allowNull: false,
 		},
 		seen: {

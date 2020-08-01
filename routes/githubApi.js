@@ -17,7 +17,7 @@ setInterval(() => {
 		(error, res) => {
 			if (error) {
 				console.log('error: ', error);
-				return response.status(404);
+				return;
 			}
 			const {
 				login: userName,
@@ -54,7 +54,7 @@ setInterval(() => {
 			);
 		}
 	);
-}, 360000);
+}, 120000);
 
 router.get('/', (req, response) => {
 	if (!obj) {

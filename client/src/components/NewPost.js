@@ -42,7 +42,7 @@ function Edit() {
 					description,
 					image,
 					content,
-					author: user.shortName,
+					author: user.id,
 				},
 				history
 			)

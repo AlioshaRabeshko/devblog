@@ -32,7 +32,7 @@ const Posts = db.define(
 			allowNull: false,
 		},
 		author: {
-			type: Sequelize.STRING,
+			type: Sequelize.INTEGER,
 			allowNull: false,
 		},
 		seen: {

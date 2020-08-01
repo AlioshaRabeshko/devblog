@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImages, getImages, uploadFromLink } from '../actions/images';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Gallery() {
 	const { user } = useSelector((state) => state.user.user);
@@ -10,7 +12,7 @@ function Gallery() {
 	function uploadImg(e, name) {
 		dispatch(uploadImages(e.target.files, name));
 	}
-	useEffect(() => dispatch(getImages(user.shortName)), [dispatch, user]);
+	useEffect(() => dispatch(getImages(user.id)), [dispatch, user]);
 	function copyToClipboard(link) {
 		const textField = document.createElement('textarea');
 		textField.innerText = link;
@@ -29,7 +31,7 @@ function Gallery() {
 					name="img"
 					accept="image/*"
 					multiple
-					onChange={(e) => uploadImg(e, user.shortName)}
+					onChange={(e) => uploadImg(e, user.id)}
 				/>
 				<label htmlFor="img">Choose images to upload</label>
 				<p className="or">Or upload from URL</p>
@@ -40,7 +42,7 @@ function Gallery() {
 					className="sign-button upload-button"
 					onClick={() =>
 						imageUrl !== ''
-							? dispatch(uploadFromLink(imageUrl, user.shortName))
+							? dispatch(uploadFromLink(imageUrl, user.id))
 							: console.log('empty')
 					}>
 					Upload
@@ -53,9 +55,10 @@ function Gallery() {
 					onClick={() =>
 						copyToClipboard(`http://${images.host}:5000/api/images/${el.name}`)
 					}>
-					<img
+					<LazyLoadImage
 						src={`http://${images.host}:5000/api/images/${el.name}`}
 						alt=""
+						effect="blur"
 					/>
 				</div>
 			))}

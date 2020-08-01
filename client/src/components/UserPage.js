@@ -23,7 +23,7 @@ function User() {
 
 	useEffect(() => {
 		dispatch(getSubs(user.user.id));
-		dispatch(getPosts(null, user.user.shortName));
+		dispatch(getPosts(null, user.user.id));
 		setStatusLocal(user.user.status);
 		if (user.user.verified >= 50) dispatch(getUnverified());
 	}, [user, dispatch]);

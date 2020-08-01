@@ -3,8 +3,8 @@
 const db = require('./index');
 const Sequelize = require('sequelize');
 
-const Images = db.define(
-	'images',
+const Comments = db.define(
+	'comments',
 	{
 		id: {
 			type: Sequelize.INTEGER,
@@ -12,13 +12,16 @@ const Images = db.define(
 			primaryKey: true,
 			allowNull: false,
 		},
-		name: {
-			type: Sequelize.STRING,
-			allowNull: false,
-			unique: true,
-		},
-		author: {
+		postId: {
 			type: Sequelize.INTEGER,
+			allowNull: false,
+		},
+		authorId: {
+			type: Sequelize.INTEGER,
+			allowNull: false,
+		},
+		content: {
+			type: Sequelize.STRING,
 			allowNull: false,
 		},
 	},
@@ -28,4 +31,4 @@ const Images = db.define(
 	}
 );
 
-module.exports = Images;
+module.exports = Comments;

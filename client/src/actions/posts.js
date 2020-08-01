@@ -9,12 +9,12 @@ import {
 } from './types';
 import axios from 'axios';
 
-export const getPosts = (category, author, query, page) => (dispatch) => {
+export const getPosts = (category, authorId, query, page) => (dispatch) => {
 	const req = `${
 		category
 			? '/category/' + category
-			: author
-			? '/author/' + author
+			: authorId
+			? '/author/' + authorId
 			: query
 			? '/search/' + query
 			: ''
@@ -56,8 +56,8 @@ export const editPost = (id, userId, data, cb) => (dispatch) => {
 	});
 };
 
-export const deletePost = (id, userName, history) => (dispatch) => {
-	axios.delete(`/api/posts/${userName}/${id}`).then(() => {
+export const deletePost = (id, userId, history) => (dispatch) => {
+	axios.delete(`/api/posts/${userId}/${id}`).then(() => {
 		history.push('/');
 		dispatch({ type: DELETE_POST });
 	});
