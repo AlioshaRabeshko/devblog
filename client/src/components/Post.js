@@ -23,7 +23,7 @@ function Post(props) {
 		dispatch(getPost(id));
 	}, [dispatch, id]);
 	useEffect(() => {
-		dispatch(getRate(id, user.id));
+		if (user.id) dispatch(getRate(id, user.id));
 	}, [dispatch, id, user]);
 	function like() {
 		if (token) dispatch(putLike(id, user.id));

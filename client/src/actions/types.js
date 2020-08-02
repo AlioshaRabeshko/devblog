@@ -20,3 +20,5 @@ export const GET_UNVERIFIED = 'GET_UNVERIFIED';
 export const GET_GIT = 'GET_GIT';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';

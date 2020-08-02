@@ -1,4 +1,9 @@
-import { GET_COMMENTS, ADD_COMMENT } from '../actions/types';
+import {
+	GET_COMMENTS,
+	ADD_COMMENT,
+	EDIT_COMMENT,
+	DELETE_COMMENT,
+} from '../actions/types';
 
 const initialState = {
 	comments: [],
@@ -10,6 +15,18 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				comments: action.payload,
+			};
+		case EDIT_COMMENT:
+			state.comments[action.index].content = action.payload.content;
+			return {
+				...state,
+				comments: state.comments,
+			};
+		case DELETE_COMMENT:
+			state.comments.splice(action.index, 1);
+			return {
+				...state,
+				comments: state.comments,
 			};
 		case ADD_COMMENT:
 			return {

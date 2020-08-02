@@ -924,3 +924,7 @@ a {
 .lazy-load-image-loaded {
 	display: block !important;
 }
+
+.comment-edit {
+	padding-top: 15px;
+}

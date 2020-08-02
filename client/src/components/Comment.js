@@ -1,6 +1,19 @@
 import React from 'react';
+import PrivateComponent from './PrivateComponent';
+import { useEditor } from '../context/editor';
+import { deleteComment } from '../actions/comments';
+import { useDispatch } from 'react-redux';
 
 function Comments(props) {
+	const {
+		status,
+		setStatus,
+		setContent,
+		setId,
+		setEdit,
+		setIndex,
+	} = useEditor();
+	const dispatch = useDispatch();
 	return (
 		<div>
 			<div
@@ -22,6 +35,30 @@ function Comments(props) {
 					className="comment-content"
 					dangerouslySetInnerHTML={{ __html: props.comment.content }}
 				/>
+				<PrivateComponent perm={50}>
+					<div className="comment-edit">
+						<button
+							className="logout"
+							onClick={(e) => {
+								if (!status) {
+									setIndex(props.index);
+									setEdit(true);
+									setStatus(true);
+									setContent(props.comment.content);
+									setId(props.comment.id);
+								}
+							}}>
+							Edit
+						</button>
+						<button
+							className="logout"
+							onClick={(e) =>
+								dispatch(deleteComment(props.comment.id, props.index))
+							}>
+							Delete
+						</button>
+					</div>
+				</PrivateComponent>
 			</div>
 		</div>
 	);

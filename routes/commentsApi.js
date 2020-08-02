@@ -5,6 +5,18 @@ const Users = require('../models/users');
 const Comments = require('../models/comments');
 const router = express.Router();
 
+router.put('/edit/:id', async (req, res) => {
+	try {
+		const comment = await Comments.findOne({ where: { id: req.params.id } });
+		comment.content = req.body.content;
+		comment.save();
+		return res.status(200).send(comment);
+	} catch (error) {
+		console.log('error: ', error);
+		return res.status(404).send(error);
+	}
+});
+
 router.get('/:postId/:postAuthor', async (req, res) => {
 	try {
 		const { postId, postAuthor } = req.params;
@@ -21,7 +33,7 @@ router.get('/:postId/:postAuthor', async (req, res) => {
 					? 'Supervisor'
 					: verified >= 100
 					? 'Content editor'
-					: id === postAuthor
+					: id === +postAuthor
 					? 'Author'
 					: 'User';
 			arr.push({
@@ -65,9 +77,18 @@ router.put('/:postId/:postAuthor', async (req, res) => {
 			createdAt: comment.createdAt,
 		});
 	} catch (error) {
-		console.log('error: ', error);
-
 		return req.status(404).send(error);
+	}
+});
+
+router.delete('/:id', async (req, res) => {
+	try {
+		const comment = await Comments.findOne({ where: { id: req.params.id } });
+		comment.destroy();
+		return res.status(200).send();
+	} catch (error) {
+		console.log('error: ', error);
+		return res.status(404).send(error);
 	}
 });
 

@@ -76,10 +76,11 @@ router.get('/category/:category/:page', async (req, res) => {
 
 router.get('/author/:name/:page', async (req, res) => {
 	try {
+		const user = await Users.findOne({ where: { id: req.params.name } });
 		const data = await Posts.findAndCountAll({
 			order: [['createdAt', 'DESC']],
 			where: {
-				author: req.params.name,
+				author: user.id,
 			},
 			raw: true,
 		});
