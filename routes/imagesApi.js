@@ -8,6 +8,7 @@ const Images = require('../models/images');
 const path = require('path');
 const request = require('request');
 const sharp = require('sharp');
+const uniqueFilename = require('unique-filename');
 
 router.put('/link/:author', (req, res) => {
 	const now = Date.now();
@@ -31,45 +32,35 @@ router.put('/link/:author', (req, res) => {
 	});
 });
 
-const storage = multer.diskStorage({
-	destination: (req, file, callback) => callback(null, 'uploads'),
-	filename: (req, file, callback) => {
-		const match = ['image/png', 'image/jpeg', 'image/jpg'];
-		if (match.indexOf(file.mimetype) === -1) {
-			const message = `${file.originalname} is invalid. Only accept png/jpeg.`;
-			return callback(message, null);
-		}
-		const fileExtension = (file.originalname.match(/\.+[\S]+$/) || [])[0];
-		const filename = `${Date.now()}${fileExtension}`;
-		callback(null, filename);
-	},
-});
+const upload = multer().array('files', 10);
 
-const upload = multer({ storage }).array('files', 10);
-
-router.post('/upload/:author', upload, (req, res, next) => {
+router.post('/upload/:author', upload, async (req, res, next) => {
 	const files = req.files;
+	const images = [];
 	if (!files) {
 		const error = new Error('No Files');
 		res.status(400).send({ error });
 		return next(error);
 	}
-	const images = [];
-	files.forEach(async (img, id) => {
-		const obj = {
-			name: img.path.split('/')[1].split('.')[0] + '.webp',
-			author: req.params.author,
-		};
-		Images.create(obj);
-		images.push(obj);
-		await sharp(img.path)
-			.resize({ width: 1150 })
-			.toFile(img.path.split('.')[0] + '.webp');
-		fs.unlink(img.path, (err) => {
-			console.log(err);
-		});
-		if (id === files.length - 1) res.json({ images, host: req.hostname });
-	});
+	for (const img of files) {
+		const filename = `${uniqueFilename('./uploads')}.jpeg`;
+		await sharp(img.buffer)
+			.resize({ width: 1150, withoutEnlargement: true })
+			.jpeg({ quality: 80 })
+			.toBuffer()
+			.then((data) => {
+				const writeStream = fs.createWriteStream(filename);
+				writeStream.write(data);
+				writeStream.end();
+				writeStream.on('error', function (err) {
+					console.log(err);
+				});
+				const obj = { name: filename.split('/')[1], author: req.params.author };
+				Images.create(obj);
+				images.push(obj);
+			});
+	}
+	return res.send({ images, host: req.hostname });
 });
 
 router.get('/:name', (req, res) => {

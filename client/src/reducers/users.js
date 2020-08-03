@@ -55,7 +55,7 @@ export default function (state = initialState, action) {
 		case LOG_OUT:
 			return {
 				...state,
-				user: action.payload,
+				user: initialState.user,
 			};
 		default:
 			return state;

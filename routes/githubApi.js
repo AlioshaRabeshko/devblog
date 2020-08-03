@@ -58,7 +58,7 @@ setInterval(() => {
 
 router.get('/', (req, response) => {
 	if (!obj) {
-		return response.status(404).send(null);
+		return response.send(null);
 	}
 	response.send(obj);
 });

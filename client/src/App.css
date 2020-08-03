@@ -236,8 +236,7 @@ a:hover,
 		flex-basis: 100% !important;
 	}
 
-	.post-image,
-	.post-image-full {
+	.post-image {
 		max-width: 93% !important;
 	}
 
@@ -256,8 +255,7 @@ a:hover,
 }
 
 @media all and (max-width: 599px) {
-	.post-image,
-	.post-image-full {
+	.post-image {
 		max-width: 90% !important;
 	}
 }
@@ -324,13 +322,13 @@ a:hover,
 	display: block;
 	object-fit: cover;
 	max-width: 90%;
-	max-height: 25rem;
+	height: 25rem;
 }
 
 .post-image-full {
 	display: block;
 	object-fit: cover;
-	max-width: 95%;
+	max-width: 100%;
 }
 
 .post-type {
@@ -727,7 +725,7 @@ input.categories {
 
 .post-content img {
 	max-width: 100%;
-	object-fit: cover;
+	object-fit: scale-down;
 }
 
 ul {

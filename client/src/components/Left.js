@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGit } from '../actions/github';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Left() {
 	const [query, setQuery] = useState(null);
@@ -35,9 +37,9 @@ function Left() {
 			</div>
 			<div className="left-widget github">
 				<p className="large">GitHub</p>
-				<img alt="" src={github.image} />
+				<LazyLoadImage alt="" effect="blur" src={github.image} />
 				<br />
-				<a href={github.url}>
+				<a href={github.url} name="github" aria-label="github">
 					<p className="large">{github.userName}</p>
 				</a>
 			</div>

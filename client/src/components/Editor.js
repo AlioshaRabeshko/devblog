@@ -7,9 +7,18 @@ function TextEditor() {
 	function handleEditorChange(content, editor) {
 		setContent(content);
 	}
+	function handleChange(e) {
+		if (e.element.tagName === 'IMG') {
+			e.element.setAttribute('loading', 'lazy');
+			const width = e.element.getAttribute('width');
+			if (width.indexOf('%') === -1)
+				e.element.setAttribute('width', `${width / 1150}%`);
+		}
+	}
 	return (
 		<Editor
 			value={content}
+			onNodeChange={handleChange}
 			apiKey="hcnwhdxlemckajk9mdxkg4k04eqi1vk1lmpzr6d1qjsandxi"
 			init={{
 				menubar: true,
