@@ -7,29 +7,37 @@ const fs = require('fs');
 const Images = require('../models/images');
 const path = require('path');
 const request = require('request');
-const sharp = require('sharp');
+const imagemin = require('imagemin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 const uniqueFilename = require('unique-filename');
 
-router.put('/link/:author', (req, res) => {
-	const now = Date.now();
-	request.head(req.body.link, async () => {
-		request(req.body.link)
-			.pipe(fs.createWriteStream(`${now}.jpg`))
-			.on('close', async () => {
+router.put('/link/:author', async (req, res) => {
+	request.get(
+		req.body.link,
+		{ encoding: null },
+		async (err, response, body) => {
+			if (err) return res.status(400).send(null);
+			const filename = `${uniqueFilename('./uploads')}.jpeg`;
+			const bufferMin = await imagemin.buffer(body, {
+				plugins: [
+					imageminMozjpeg({
+						quality: 75,
+					}),
+				],
+			});
+			const writeableStream = fs.createWriteStream(filename);
+			writeableStream.write(bufferMin);
+			writeableStream.end(() => {
 				const obj = {
-					name: `${now}.webp`,
+					name: filename.split('/')[1],
 					author: req.params.author,
 				};
 				Images.create(obj);
-				await sharp(`${now}.jpg`)
-					.resize({ width: 1150 })
-					.toFile(`uploads/${now}.webp`);
-				fs.unlink(`${now}.jpg`, (err) => {
-					console.log(err);
-				});
-				res.json({ images: [obj], host: req.hostname });
+				return res.json({ images: [obj], host: req.hostname });
 			});
-	});
+			writeableStream.on('error', (err) => console.log(err));
+		}
+	);
 });
 
 const upload = multer().array('files', 10);
@@ -44,21 +52,21 @@ router.post('/upload/:author', upload, async (req, res, next) => {
 	}
 	for (const img of files) {
 		const filename = `${uniqueFilename('./uploads')}.jpeg`;
-		await sharp(img.buffer)
-			.resize({ width: 1150, withoutEnlargement: true })
-			.jpeg({ quality: 80 })
-			.toBuffer()
-			.then((data) => {
-				const writeStream = fs.createWriteStream(filename);
-				writeStream.write(data);
-				writeStream.end();
-				writeStream.on('error', function (err) {
-					console.log(err);
-				});
-				const obj = { name: filename.split('/')[1], author: req.params.author };
-				Images.create(obj);
-				images.push(obj);
-			});
+		const buffer = await imagemin.buffer(img.buffer, {
+			plugins: [imageminMozjpeg({ quality: 75 })],
+		});
+		const writeableStream = fs.createWriteStream(filename);
+		writeableStream.write(buffer);
+		writeableStream.end();
+		writeableStream.on('error', function (err) {
+			console.log(err);
+		});
+		const obj = {
+			name: filename.split('/')[1],
+			author: req.params.author,
+		};
+		Images.create(obj);
+		images.push(obj);
 	}
 	return res.send({ images, host: req.hostname });
 });

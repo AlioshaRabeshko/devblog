@@ -7,11 +7,11 @@ function Login() {
 	const { token } = useSelector((state) => state.user.user);
 	const dispatch = useDispatch();
 	const [error, setError] = useState('');
-	const [email, setEmail] = useState('Leflylll@gmail.com');
-	const [name, setName] = useState('Aliosha Rabeshko');
+	const [email, setEmail] = useState('');
+	const [name, setName] = useState('');
 	const [status, setStatus] = useState(0);
-	const [password, setPassword] = useState('22dbfE2k');
-	const [rePassword, setRePassword] = useState('22dbfE2k');
+	const [password, setPassword] = useState('');
+	const [rePassword, setRePassword] = useState('');
 
 	function logIn_local() {
 		if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -139,7 +139,7 @@ function Login() {
 			</div>
 			<input
 				className="sign-input"
-				placeholder="Email"
+				placeholder="Currently unavailable"
 				type="email"
 				onChange={(e) => setEmail(e.target.value)}
 			/>
@@ -148,7 +148,9 @@ function Login() {
 					Remembered Your password?
 				</p>
 			</div>
-			<button className="sign-button">Send password</button>
+			<button className="sign-button" disabled>
+				Send password
+			</button>
 			<p className="sign-error">{error}</p>
 		</div>
 	);

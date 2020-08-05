@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getGit } from '../actions/github';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import github from '../svgs/github.svg';
 
 function Left() {
 	const [query, setQuery] = useState(null);
 	const [email, setEmail] = useState(null);
-	const { github } = useSelector((state) => state.github);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getGit());
-	}, [dispatch]);
 	return (
 		<div className="left-container">
 			<div className="left-widget input">
@@ -37,10 +31,20 @@ function Left() {
 			</div>
 			<div className="left-widget github">
 				<p className="large">GitHub</p>
-				<LazyLoadImage alt="" effect="blur" src={github.image} />
-				<br />
-				<a href={github.url} name="github" aria-label="github">
-					<p className="large">{github.userName}</p>
+				<LazyLoadImage
+					alt=""
+					effect="blur"
+					src="https://avatars3.githubusercontent.com/u/31666986?s=460"
+					className="github-image"
+				/>
+				<a
+					href="https://github.com/AlioshaRabeshko"
+					name="github"
+					aria-label="github">
+					<p className="large github-name">
+						<img className="github-icon" src={github} />
+						Aliosha Rabeshko
+					</p>
 				</a>
 			</div>
 		</div>

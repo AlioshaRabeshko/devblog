@@ -93,7 +93,7 @@ function Post(props) {
 						alt=""
 						onClick={like}
 					/>
-					<p>{rate ? rate.likes : 0}</p>
+					<p>{rate.likes}</p>
 				</div>
 				<div className="footer-element">
 					<img
@@ -102,7 +102,7 @@ function Post(props) {
 						alt=""
 						onClick={dislike}
 					/>
-					<p>{rate ? rate.dislikes : 0}</p>
+					<p>{rate.dislikes}</p>
 				</div>
 				<div className="footer-element">
 					<img src={see} alt="" />

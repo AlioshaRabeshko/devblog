@@ -10,6 +10,7 @@
 	background-color: #fff;
 	display: flex;
 	box-shadow: 0 0 3px rgb(44, 46, 54);
+	z-index: 1000;
 }
 
 .menu-list {
@@ -139,6 +140,14 @@ a:hover,
 		margin-bottom: 3px !important;
 		max-height: 308px !important;
 	}
+
+	.github-image {
+		height: 225px !important;
+	}
+
+	.narrow-post > * {
+		padding: 0 5px !important;
+	}
 }
 
 @media all and (min-width: 700px) and (max-width: 849px) {
@@ -156,7 +165,6 @@ a:hover,
 
 	.left-container {
 		order: 2;
-		height: 100%;
 		width: 100%;
 		margin-left: 7px;
 	}
@@ -206,6 +214,10 @@ a:hover,
 	.comment-content {
 		flex: 2 !important;
 	}
+
+	.left-widget {
+		flex: 0 1 !important;
+	}
 }
 
 @media all and (max-width: 699px) {
@@ -236,8 +248,8 @@ a:hover,
 		flex-basis: 100% !important;
 	}
 
-	.post-image {
-		max-width: 93% !important;
+	.post > * {
+		padding: 0 5px !important;
 	}
 
 	.gallery-image {
@@ -255,9 +267,9 @@ a:hover,
 }
 
 @media all and (max-width: 599px) {
-	.post-image {
+	/* .post-image {
 		max-width: 90% !important;
-	}
+	} */
 }
 
 @media all and (max-width: 499px) {
@@ -320,9 +332,9 @@ a:hover,
 
 .post-image {
 	display: block;
-	object-fit: cover;
-	max-width: 90%;
-	height: 25rem;
+	object-fit: scale-down;
+	max-width: 100%;
+	max-height: 28rem;
 }
 
 .post-image-full {
@@ -404,17 +416,21 @@ a:hover,
 	height: 100%;
 }
 
-.github img {
+.github-image {
 	width: 240px;
+	height: 240px;
 	object-fit: cover;
-	max-height: 180px;
-	object-position: -10% 90%;
+	box-shadow: 0 0 2px #2c2e36;
+}
+
+.github-icon {
+	width: 22px;
+	margin: 0 5px -4px 5px;
 }
 
 .github p {
 	margin: 10px;
 }
-
 .repo {
 	box-shadow: 0 0 1px rgb(44, 46, 54);
 }
@@ -466,7 +482,7 @@ body,
 
 .sign-title {
 	font-size: 30px;
-	background-image: url('svgs/Login_v15/Login_v15/images/bg-01.jpg');
+	background-image: url('svgs/bg-01.jpg');
 	background-size: 100%;
 	height: 120px;
 	opacity: 0.7;
@@ -852,11 +868,6 @@ a {
 
 .large {
 	font-size: large;
-}
-
-.empty {
-	margin: 0;
-	padding: 0;
 }
 
 .author-info p {
