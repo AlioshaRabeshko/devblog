@@ -66,8 +66,8 @@ export const setStatus = (status, userId) => (dispatch) => {
 		.then((res) => dispatch({ type: SET_STATUS, payload: res.data }));
 };
 
-export const setSub = (sub, userId) => (dispatch) => {
+export const setSub = (sub, email) => (dispatch) => {
 	axios
-		.put(`/api/users/settings/${sub}/${userId}`)
-		.then((res) => dispatch({ type: SET_SUB }));
+		.put(`/api/users/settings/${sub}/${email}`)
+		.then(() => dispatch({ type: SET_SUB }));
 };

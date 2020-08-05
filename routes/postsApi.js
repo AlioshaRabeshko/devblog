@@ -7,6 +7,8 @@ const Users = require('../models/users');
 const DeletedPosts = require('../models/deletedPosts');
 const History = require('../models/postsHistory');
 const router = express.Router();
+const transporter = require('./mail');
+const Subs = require('../models/subs');
 
 router.get('/category/', async (req, res) => {
 	try {
@@ -25,7 +27,7 @@ router.post('/add', async (req, res) => {
 	try {
 		const { author, category, content, description, image, title } = req.body;
 		const ver = await Users.findOne({
-			attributes: ['verified'],
+			attributes: ['verified', 'name'],
 			where: { id: author },
 		});
 		const post = await Posts.create({
@@ -37,6 +39,23 @@ router.post('/add', async (req, res) => {
 			title,
 			verified: ver.verified >= 20,
 		});
+		if (ver.verified >= 20) {
+			const subs = await Subs.findAll({ where: { category: post.category } });
+			const emails = subs.map((el) => el.email);
+			await transporter.sendMail(
+				{
+					from: '"News DevBlog" <test@devblog.dubrmed.rv.ua>',
+					to: emails,
+					subject: `New post is category ${post.category} has been published.`,
+					text: `${post.title}`,
+					html: `<a href="http://${req.headers.host}/post/${post.id}}">${post.title}</a><br><p>Posted by ${ver.name}.</p>`,
+				},
+				(err, info) => {
+					console.log('info: ', info);
+					console.log('err: ', err);
+				}
+			);
+		}
 		return res.status(201).json(post);
 	} catch (err) {
 		return res.status(404);
@@ -146,6 +165,21 @@ router.put('/verify/:id', async (req, res) => {
 		const author = await Users.findOne({ where: { id: post.author } });
 		author.verified++;
 		author.save();
+		const subs = await Subs.findAll({ where: { category: post.category } });
+		const emails = subs.map((el) => el.email);
+		await transporter.sendMail(
+			{
+				from: '"News DevBlog" <test@devblog.dubrmed.rv.ua>',
+				to: emails,
+				subject: `New post is category ${post.category} has been published.`,
+				text: `${post.title}`,
+				html: `<a href="http://${req.headers.host}/post/${req.params.id}}">${post.title}</a><br><p>Posted by ${author.name}.</p>`,
+			},
+			(err, info) => {
+				console.log('info: ', info);
+				console.log('err: ', err);
+			}
+		);
 		return res.status(202).send(post);
 	} catch (err) {
 		return res.status(404);

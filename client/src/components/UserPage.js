@@ -55,7 +55,7 @@ function User() {
 								type="checkbox"
 								id={el}
 								defaultChecked={true}
-								onClick={(e) => dispatch(setSub(e.target.id, user.user.id))}
+								onClick={(e) => dispatch(setSub(e.target.id, user.user.email))}
 							/>
 							<label htmlFor={el}>{el}</label>
 						</div>
@@ -69,7 +69,9 @@ function User() {
 									name={el}
 									id={el}
 									value="a1"
-									onClick={(e) => dispatch(setSub(e.target.id, user.user.id))}
+									onClick={(e) =>
+										dispatch(setSub(e.target.id, user.user.email))
+									}
 								/>
 								<label htmlFor={el}>{el}</label>
 							</div>
