@@ -34,6 +34,10 @@ function Edit() {
 			setWarn('No content');
 			return;
 		}
+		if (!category) {
+			setWarn('No category');
+			return;
+		}
 		dispatch(
 			addPost(
 				{

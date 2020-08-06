@@ -13,7 +13,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Post(props) {
 	const { id } = props.match.params;
-	const { post } = useSelector((state) => state.posts);
+	const { post, loading } = useSelector((state) => state.posts);
 	const { rate } = useSelector((state) => state.rate);
 	const { user, token } = useSelector((state) => state.user.user);
 	const history = useHistory();
@@ -31,7 +31,8 @@ function Post(props) {
 	function dislike() {
 		if (token) dispatch(putDislike(id, user.id));
 	}
-	if (!id) return <Redirect to="/undefined" />;
+	if (loading) return '';
+	if (!id || !post) return <Redirect to="/undefined" />;
 	const {
 		title,
 		category,

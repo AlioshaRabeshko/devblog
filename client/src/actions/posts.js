@@ -6,10 +6,12 @@ import {
 	DELETE_POST,
 	EDIT_STATEMENT,
 	GET_UNVERIFIED,
+	LOADING,
 } from './types';
 import axios from 'axios';
 
 export const getPosts = (category, authorId, query, page) => (dispatch) => {
+	dispatch(setLoading());
 	const req = `${
 		category
 			? '/category/' + category
@@ -28,12 +30,21 @@ export const getPosts = (category, authorId, query, page) => (dispatch) => {
 };
 
 export const getPost = (id) => (dispatch) => {
-	axios.get(`/api/posts/post/${id}`).then((res) =>
-		dispatch({
-			type: GET_POST,
-			payload: res.data,
-		})
-	);
+	dispatch(setLoading());
+	axios
+		.get(`/api/posts/post/${id}`)
+		.then((res) =>
+			dispatch({
+				type: GET_POST,
+				payload: res.data,
+			})
+		)
+		.catch(() =>
+			dispatch({
+				type: GET_POST,
+				payload: null,
+			})
+		);
 };
 
 export const addPost = (data, history) => (dispatch) => {
@@ -88,4 +99,10 @@ export const getUnverified = () => (dispatch) => {
 			payload: res.data,
 		});
 	});
+};
+
+export const setLoading = () => {
+	return {
+		type: LOADING,
+	};
 };

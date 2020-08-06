@@ -6,6 +6,7 @@ import {
 	GET_CATEGORIES,
 	EDIT_STATEMENT,
 	GET_UNVERIFIED,
+	LOADING,
 } from '../actions/types';
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
 	},
 	categories: [],
 	unverified: [],
+	loading: false,
 };
 
 export default function (state = initialState, action) {
@@ -35,11 +37,13 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				posts: action.payload,
+				loading: false,
 			};
 		case GET_POST:
 			return {
 				...state,
 				post: action.payload,
+				loading: false,
 			};
 		case EDIT_STATEMENT:
 			return {
@@ -65,6 +69,11 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				response: action.payload,
+			};
+		case LOADING:
+			return {
+				...state,
+				loading: true,
 			};
 		default:
 			return state;

@@ -53,10 +53,10 @@ function Gallery() {
 					className="gallery-image"
 					key={id + 1}
 					onClick={() =>
-						copyToClipboard(`http://${images.host}:5000/api/images/${el.name}`)
+						copyToClipboard(`http://${images.host}/api/images/${el.name}`)
 					}>
 					<LazyLoadImage
-						src={`http://${images.host}:5000/api/images/${el.name}`}
+						src={`http://${images.host}/api/images/${el.name}`}
 						alt=""
 						effect="blur"
 					/>

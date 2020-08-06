@@ -8,14 +8,16 @@ import { getPosts } from '../actions/posts';
 import { useParams } from 'react-router-dom';
 
 function PostList(props) {
-	const { posts } = useSelector((state) => state.posts);
+	const { posts, loading } = useSelector((state) => state.posts);
 	const { author, category, query, page } = useParams();
+
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getPosts(category, author, query, page));
 		for (let i = window.scrollY; i > 0; i--)
 			window.setTimeout(() => window.scrollTo(0, i), 100);
 	}, [dispatch, author, category, query, page]);
+	if (loading) return '';
 	return (
 		<div className="container list-container">
 			<div className="right-container">

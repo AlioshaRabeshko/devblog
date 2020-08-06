@@ -69,7 +69,7 @@ router.get('/post/:id', async (req, res) => {
 		post.save();
 		return res.status(202).send(post);
 	} catch (err) {
-		return res.status(404);
+		return res.status(404).send(null);
 	}
 });
 

@@ -5,7 +5,6 @@ import UserPage from './UserPage';
 
 function User() {
 	const [tab, setTab] = useState({ one: true, two: false, three: false });
-
 	return (
 		<div className="post single user-console">
 			<div className="tabs">

@@ -60,13 +60,21 @@ function Login() {
 						<p>Sing In</p>
 					</div>
 				</div>
+				<label htmlFor="email" hidden>
+					Email
+				</label>
 				<input
 					className="sign-input"
+					id="email"
 					placeholder="Email"
 					type="email"
 					onChange={(e) => setEmail(e.target.value)}
 				/>
+				<label htmlFor="pwd" hidden>
+					Password
+				</label>
 				<input
+					id="pwd"
 					className="sign-input"
 					placeholder="Password"
 					type="password"
@@ -94,13 +102,21 @@ function Login() {
 						<p>Sing Up</p>
 					</div>
 				</div>
+				<label htmlFor="email" hidden>
+					Email
+				</label>
 				<input
+					id="email"
 					className="sign-input"
 					placeholder="Email"
 					type="email"
 					onChange={(e) => setEmail(e.target.value)}
 				/>
+				<label htmlFor="pwd" hidden>
+					Password
+				</label>
 				<input
+					id="pwd"
 					className="sign-input"
 					placeholder="Password"
 					type="password"
@@ -108,12 +124,17 @@ function Login() {
 				/>
 				<br />
 				<input
+					id="pwd"
 					className="sign-input"
 					placeholder="Repeat password"
 					type="password"
 					onChange={(e) => setRePassword(e.target.value)}
 				/>
+				<label htmlFor="name" hidden>
+					Name
+				</label>
 				<input
+					id="name"
 					className="sign-input"
 					placeholder="Name"
 					type="text"

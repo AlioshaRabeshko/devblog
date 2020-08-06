@@ -6,6 +6,7 @@ import {
 	GET_SUBS,
 	SET_STATUS,
 	SET_SUB,
+	USER_LOADING,
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
 		},
 	},
 	subs: [],
+	loading: false,
 };
 
 export default function (state = initialState, action) {
@@ -27,21 +29,25 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				user: action.payload,
+				loading: false,
 			};
 		case SIGN_UP:
 			return {
 				...state,
 				user: action.payload,
+				loading: false,
 			};
 		case CHECK_AUTH:
 			return {
 				...state,
 				user: action.payload,
+				loading: false,
 			};
 		case GET_SUBS:
 			return {
 				...state,
 				subs: action.payload,
+				loading: false,
 			};
 		case SET_STATUS:
 			return {
@@ -56,6 +62,11 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				user: initialState.user,
+			};
+		case USER_LOADING:
+			return {
+				...state,
+				loading: true,
 			};
 		default:
 			return state;
