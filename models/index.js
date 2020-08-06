@@ -2,10 +2,15 @@
 
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('devblog', 'devblog', 'qwerty123', {
-	dialect: 'mysql',
-	host: 'localhost',
-});
+const sequelize = new Sequelize(
+	process.env.dbName,
+	process.env.dbUser,
+	process.env.dbPwd,
+	{
+		dialect: 'mysql',
+		host: 'localhost',
+	}
+);
 
 // sequelize.sync({ force: true });
 
