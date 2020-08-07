@@ -89,9 +89,6 @@ export const setSub = (sub, email) => (dispatch) => {
 		.then(() => dispatch({ type: SET_SUB }));
 };
 
-export const setLoading = () => {
-	console.log('loading should be true');
-	return {
-		type: USER_LOADING,
-	};
-};
+export const setLoading = () => ({
+	type: USER_LOADING,
+});

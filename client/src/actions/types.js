@@ -24,3 +24,4 @@ export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const USER_LOADING = 'USER_LOADING';
 export const LOADING = 'LOADING';
+export const ERROR = 'ERROR';

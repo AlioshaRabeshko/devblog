@@ -6,7 +6,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Gallery() {
 	const { user } = useSelector((state) => state.user.user);
-	const images = useSelector((state) => state.images.images);
+	const { images } = useSelector((state) => state.images);
 	const [imageUrl, setImageUrl] = useState('');
 	const dispatch = useDispatch();
 	function uploadImg(e, name) {

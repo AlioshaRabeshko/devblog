@@ -43,6 +43,8 @@
 	},
 	"proxy": "http://localhost:5000/",
 	"devDependencies": {
-		"gzipper": "^4.0.1"
+		"gzipper": "^4.0.1",
+		"node-sass": "^4.14.1",
+		"sass-loader": "^9.0.3"
 	}
 }
