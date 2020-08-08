@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import Menu from './components/Menu';
 import Container from './components/Container';
 import { useDispatch } from 'react-redux';

@@ -1,3 +1,17 @@
+$black: rgb(44, 46, 54);
+$postBackground: #fff;
+$mainBackground: #e7e7e7;
+$redLinks: rgb(197, 14, 14);
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 .App {
 	text-align: center;
 	justify-content: center;
@@ -6,10 +20,10 @@
 .top {
 	width: 85%;
 	margin: auto;
-	color: rgb(44, 46, 54);
-	background-color: #fff;
+	color: $black;
+	background-color: $postBackground;
 	display: flex;
-	box-shadow: 0 0 3px rgb(44, 46, 54);
+	box-shadow: 0 0 3px $black;
 	z-index: 1000;
 }
 
@@ -34,12 +48,12 @@ a:link,
 }
 
 a:visited {
-	color: rgb(44, 46, 54);
+	color: $black;
 }
 
 a:hover,
 .clickable-p:hover {
-	color: rgb(197, 14, 14);
+	color: $redLinks;
 	cursor: pointer;
 }
 
@@ -314,9 +328,9 @@ a:hover,
 .post,
 .sign {
 	margin: 10px;
-	background-color: #fff;
+	background-color: $postBackground;
 	padding: 5px;
-	box-shadow: 0 0 5px rgb(44, 46, 54);
+	box-shadow: 0 0 5px $black;
 }
 
 .wide-post > *,
@@ -351,18 +365,23 @@ a:hover,
 
 .left-widget {
 	padding: 10px;
-	background-color: #fff;
-	box-shadow: 0 0 2px rgb(44, 46, 54);
+	background-color: $postBackground;
+	box-shadow: 0 0 2px $black;
 	margin: 3px;
 	flex: 1 1;
 }
 
-.left-widget.input input {
-	width: 90%;
-	font-size: medium;
-	padding-left: 3px;
-	margin: auto;
-	margin-top: 10px;
+.left-widget.input {
+	input {
+		width: 90%;
+		font-size: medium;
+		padding-left: 3px;
+		margin: auto;
+		margin-top: 10px;
+	}
+	label {
+		font-size: large;
+	}
 }
 
 .left-widget.input button,
@@ -377,11 +396,7 @@ a:hover,
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
-	background-color: #e7e7e7;
-}
-
-.left-widget.input label {
-	font-size: large;
+	background-color: $mainBackground;
 }
 
 .narrow-post {
@@ -399,16 +414,14 @@ a:hover,
 	display: flex;
 	list-style: none;
 	justify-content: center;
-}
-
-.pagination li {
-	padding: 10px 15px;
-	margin: 2px;
-	box-shadow: 0 0 3px rgb(44, 46, 54);
-}
-
-.pagination a :hover {
-	background-color: rgb(190, 184, 184);
+	li {
+		padding: 10px 15px;
+		margin: 2px;
+		box-shadow: 0 0 3px $black;
+	}
+	a :hover {
+		background-color: rgb(190, 184, 184);
+	}
 }
 
 .github {
@@ -416,6 +429,9 @@ a:hover,
 	flex: 3;
 	margin-bottom: 10px;
 	height: 100%;
+	p {
+		margin: 10px;
+	}
 }
 
 .github-image {
@@ -430,24 +446,23 @@ a:hover,
 	margin: 0 5px -4px 5px;
 }
 
-.github p {
-	margin: 10px;
-}
 .repo {
-	box-shadow: 0 0 1px rgb(44, 46, 54);
+	box-shadow: 0 0 1px $black;
 }
 
 .post-footer {
 	display: flex;
 	justify-content: space-between;
-	box-shadow: 0 -1px 5px rgb(44, 46, 54);
+	box-shadow: 0 -1px 5px $black;
 	flex-flow: row wrap;
 }
 
-.footer-element > img {
-	color: #000;
-	height: 20px;
-	width: 20px;
+.footer-element {
+	img {
+		color: #000;
+		height: 20px;
+		width: 20px;
+	}
 }
 
 .post-date {
@@ -456,10 +471,9 @@ a:hover,
 
 .footer-element {
 	display: flex;
-}
-
-.footer-element img {
-	margin: 16px 8px;
+	img {
+		margin: 16px 8px;
+	}
 }
 
 .single {
@@ -489,18 +503,17 @@ body,
 	height: 120px;
 	opacity: 0.7;
 	margin-bottom: 10px;
-	color: #fff;
-}
+	color: $postBackground;
 
-.sign-title div p {
-	vertical-align: middle;
-	margin: 0 40px 10px 40px;
-	padding-top: 8%;
-}
-
-.sign-title div {
-	height: 100%;
-	background: rgba(27, 26, 70, 0.7);
+	div {
+		height: 100%;
+		background: rgba(27, 26, 70, 0.7);
+		p {
+			vertical-align: middle;
+			margin: 0 40px 10px 40px;
+			padding-top: 8%;
+		}
+	}
 }
 
 .sign-input {
@@ -526,28 +539,30 @@ select {
 	display: flex;
 	justify-content: space-between;
 	margin: 0 20px;
-}
 
-.sign-links p {
-	margin: 5px;
+	p {
+		margin: 5px;
+	}
 }
 
 .restore {
 	height: 85px !important;
-}
 
-.restore div p {
-	padding-top: 20px;
+	div {
+		p {
+			padding-top: 20px;
+		}
+	}
 }
 
 .sign-error {
-	color: rgb(197, 14, 14);
+	color: $redLinks;
 }
 
 .editor {
 	margin: 5px;
 	min-height: 400px;
-	box-shadow: 0 0 2px rgb(44, 46, 54);
+	box-shadow: 0 0 2px $black;
 	padding: 7px;
 	margin-bottom: 20px;
 }
@@ -559,26 +574,25 @@ select {
 
 .toolbar-btn.clickable-p {
 	padding: 7px;
-	box-shadow: 0 0px 2px rgb(44, 46, 54);
-}
+	box-shadow: 0 0px 2px $black;
 
-.toolbar-btn img {
-	height: 20px;
-}
-
-.toolbar-btn p {
-	margin: 0;
-	font-size: 17px;
+	img {
+		height: 20px;
+	}
+	p {
+		margin: 0;
+		font-size: 17px;
+	}
 }
 
 .tabs {
 	font-size: 0;
 	max-width: 100%;
 	padding: 0;
-}
 
-.tabs > input[type='radio'] {
-	display: none;
+	input[type='radio'] {
+		display: none;
+	}
 }
 
 .tabs > div {
@@ -607,31 +621,31 @@ select {
 }
 
 .tabs > input[type='radio']:checked + label {
-	background-color: #fff;
+	background-color: $postBackground;
 	color: rgb(14, 197, 14);
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid $postBackground;
 }
 
 .new-post-title {
 	margin: 5px 5px 20px 5px;
 }
 
-.new-post-inputs input,
-.new-post-inputs textarea,
-.gallery-image input {
-	width: 100%;
-	font-size: large;
-	border-left: none;
-	border-right: none;
-	border-top: none;
-}
-
-.new-post-inputs textarea {
-	margin: 10px 0;
-	resize: vertical;
-	font-family: inherit;
-	font-size: medium;
-	height: 110px;
+.new-post-inputs {
+	textarea {
+		margin: 10px 0;
+		resize: vertical;
+		font-family: inherit;
+		font-size: medium;
+		height: 110px;
+	}
+	input,
+	textarea {
+		width: 100%;
+		font-size: large;
+		border-left: none;
+		border-right: none;
+		border-top: none;
+	}
 }
 
 .gallery-image-list {
@@ -643,13 +657,23 @@ select {
 	max-width: 32%;
 	flex: 1 1 30%;
 	padding: 3px;
-	box-shadow: 0 0px 2px rgb(44, 46, 54);
-}
+	box-shadow: 0 0px 2px $black;
 
-.gallery-image img {
-	width: 100%;
-	height: 230px;
-	object-fit: cover;
+	input {
+		// width: 100%;
+		font-size: large;
+		border-left: none;
+		border-right: none;
+		border-top: none;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	img {
+		width: 100%;
+		height: 230px;
+		object-fit: cover;
+	}
 }
 
 .user-console {
@@ -670,7 +694,7 @@ select {
 	font-size: 1em;
 	font-weight: 700;
 	color: white;
-	background-color: rgb(44, 46, 54);
+	background-color: $black;
 	cursor: pointer;
 	display: block;
 	margin-left: auto;
@@ -682,20 +706,12 @@ select {
 
 .img-input:focus + label,
 .img-input + label:hover {
-	background-color: rgb(197, 14, 14);
+	background-color: $redLinks;
 }
 
 p.or {
 	text-align: center;
 	font-size: larger;
-}
-
-.gallery-image input {
-	width: 90%;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: large;
 }
 
 .upload-button {
@@ -707,16 +723,18 @@ p.or {
 }
 
 button:focus {
-	outline: 1px solid rgb(197, 14, 14);
+	outline: 1px solid $redLinks;
 }
 
 .select {
 	display: flex;
 	flex-direction: row;
-}
-
-.select * {
-	margin-right: 20px;
+	* {
+		margin-right: 20px;
+	}
+	label {
+		padding-top: 5px;
+	}
 }
 
 .cat-select,
@@ -728,10 +746,6 @@ button:focus {
 	padding: 5px;
 }
 
-.select label {
-	padding-top: 5px;
-}
-
 input.categories {
 	width: 40%;
 	padding: 5px;
@@ -739,11 +753,11 @@ input.categories {
 
 .post-content {
 	padding-bottom: 20px;
-}
 
-.post-content img {
-	max-width: 100%;
-	object-fit: scale-down;
+	img {
+		max-width: 100%;
+		object-fit: scale-down;
+	}
 }
 
 ul {
@@ -754,36 +768,38 @@ ul {
 	text-align: center;
 }
 
-.moder-section {
-	display: flex;
-	flex-direction: row;
-}
-
 .verify {
 	display: flex;
 	flex-direction: row;
 }
 
-.moder-section div {
-	width: 50%;
+.moder-section {
+	display: flex;
+	flex-direction: row;
+	button {
+		width: 90%;
+		font-size: medium;
+		border: none;
+		padding: 10px;
+		background-color: $mainBackground;
+		margin-bottom: 2px;
+	}
+	div {
+		width: 50%;
+	}
 }
 
-.moder-section button {
-	width: 90%;
-	font-size: medium;
-	border: none;
-	padding: 10px;
-	background-color: #e7e7e7;
-	margin-bottom: 2px;
+.moder-section {
+	button:hover {
+		color: $redLinks;
+	}
 }
 
-.moder-section button:hover {
-	color: rgb(197, 14, 14);
-}
-
-.moder-section .sign-button {
-	margin: 0 0 2px 0;
-	padding: 10px;
+.moder-section {
+	.sign-button {
+		margin: 0 0 2px 0;
+		padding: 10px;
+	}
 }
 
 .user-page {
@@ -795,7 +811,16 @@ ul {
 
 .user-block {
 	padding: 10px;
-	box-shadow: 0 0 1px rgb(44, 46, 54);
+	box-shadow: 0 0 1px $black;
+	.sign-button {
+		.logout {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+	}
+	.article {
+		height: 20px;
+	}
 }
 
 .user-status {
@@ -829,25 +854,15 @@ ul {
 	margin: 5px;
 }
 
-.user-block .sign-button,
-.logout {
-	margin-top: 0;
-	margin-bottom: 10px;
-}
-
-.article {
-	height: 20px;
-}
-
 .rated {
 	filter: invert(19%) sepia(94%) saturate(2525%) hue-rotate(353deg)
 		brightness(83%) contrast(100%);
 }
 
 .edit-post {
-	background-color: #fff;
+	background-color: $postBackground;
 	padding: 20px;
-	box-shadow: 0 0 5px rgb(44, 46, 54);
+	box-shadow: 0 0 5px $black;
 	width: 90%;
 }
 
@@ -865,21 +880,21 @@ ul {
 }
 
 a {
-	color: rgb(44, 46, 54);
+	color: $black;
 }
 
 .large {
 	font-size: large;
 }
 
-.author-info p {
-	text-align: center !important;
-}
-
 .author-info {
 	flex: 1;
-	box-shadow: 0 0 1px rgb(44, 46, 54);
+	box-shadow: 0 0 1px $black;
 	padding: 5px;
+
+	p {
+		text-align: center !important;
+	}
 }
 
 .author {
@@ -890,13 +905,13 @@ a {
 
 .role {
 	margin: 8px;
-	color: rgb(197, 14, 14);
+	color: $redLinks;
 }
 
 .comment {
 	display: flex;
 	flex-wrap: wrap;
-	box-shadow: 0 0 1px rgb(44, 46, 54);
+	box-shadow: 0 0 1px $black;
 	margin: 10px 0;
 }
 
@@ -904,20 +919,20 @@ a {
 	flex: 3;
 	padding: 10px;
 	min-width: 200px;
-	box-shadow: 0 0 1px rgb(44, 46, 54);
-}
+	box-shadow: 0 0 1px $black;
 
-.comment-content p {
-	margin: 0;
+	p {
+		margin: 0;
+	}
 }
 
 .comments {
 	padding: 0;
-}
 
-.comment .status {
-	margin: 0;
-	font-size: small;
+	.status {
+		margin: 0;
+		font-size: small;
+	}
 }
 
 .commented {
@@ -925,7 +940,7 @@ a {
 }
 
 .box-supervisor {
-	box-shadow: 0 0 3px rgb(197, 14, 14);
+	box-shadow: 0 0 3px $redLinks;
 }
 
 .new-comment {
