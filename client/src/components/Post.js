@@ -5,14 +5,14 @@ import see from '../svgs/seen.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost, verify, deletePost } from '../actions/posts';
 import { getRate, putLike, putDislike } from '../actions/rating';
-import { Redirect, Link, useHistory } from 'react-router-dom';
+import { Redirect, Link, useHistory, useParams } from 'react-router-dom';
 import PrivateComponent from './PrivateComponent';
 import Comments from './Comments';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function Post(props) {
-	const { id } = props.match.params;
+	const { id } = useParams();
 	const { post, loading } = useSelector((state) => state.posts);
 	const { rate } = useSelector((state) => state.rate);
 	const { user, token } = useSelector((state) => state.user.user);
@@ -31,7 +31,7 @@ function Post(props) {
 	function dislike() {
 		if (token) dispatch(putDislike(id, user.id));
 	}
-	if (loading) return '';
+	if (loading) return null;
 	if (!id || !post) return <Redirect to="/undefined" />;
 	const {
 		title,
@@ -56,7 +56,7 @@ function Post(props) {
 			<div
 				className="post-content"
 				dangerouslySetInnerHTML={{
-					__html: content ? content : '',
+					__html: content ? content : null,
 				}}
 			/>
 			<div className="moder-section">
@@ -90,7 +90,7 @@ function Post(props) {
 				<div className="footer-element">
 					<img
 						src={likeSvg}
-						className={rate.liked === 1 ? 'rated' : ''}
+						className={rate.liked === 1 ? 'rated' : null}
 						alt=""
 						onClick={like}
 					/>
@@ -99,7 +99,7 @@ function Post(props) {
 				<div className="footer-element">
 					<img
 						src={dislikeSvg}
-						className={rate.liked === -1 ? 'rated' : ''}
+						className={rate.liked === -1 ? 'rated' : null}
 						alt=""
 						onClick={dislike}
 					/>

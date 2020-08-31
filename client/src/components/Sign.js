@@ -145,8 +145,9 @@ function Login() {
 						Already have account?
 					</p>
 				</div>
-				<button className="sign-button" onClick={sign}>
-					Sign Up
+				{/* <button className="sign-button" onClick={sign}> */}
+				<button className="sign-button" disabled>
+					Currently disabled
 				</button>
 				<p className="sign-error">{error}</p>
 			</div>
@@ -160,7 +161,7 @@ function Login() {
 			</div>
 			<input
 				className="sign-input"
-				placeholder="Currently unavailable"
+				placeholder="Email"
 				type="email"
 				onChange={(e) => setEmail(e.target.value)}
 			/>
@@ -170,7 +171,7 @@ function Login() {
 				</p>
 			</div>
 			<button className="sign-button" disabled>
-				Send password
+				Currently disabled
 			</button>
 			<p className="sign-error">{error}</p>
 		</div>

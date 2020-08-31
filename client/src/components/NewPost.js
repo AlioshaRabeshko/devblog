@@ -14,30 +14,15 @@ function Edit() {
 	const [image, setImage] = useState(null);
 	const [description, setDescription] = useState(null);
 	const [category, setCategory] = useState(null);
-	const [warn, setWarn] = useState('');
+	const [warn, setWarn] = useState(null);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	function submitPost() {
-		if (!title) {
-			setWarn('No title');
-			return;
-		}
-		if (!description) {
-			setWarn('No description');
-			return;
-		}
-		if (!image) {
-			setWarn('No image');
-			return;
-		}
-		if (!content) {
-			setWarn('No content');
-			return;
-		}
-		if (!category) {
-			setWarn('No category');
-			return;
-		}
+		if (!title) return setWarn('No title');
+		if (!description) return setWarn('No description');
+		if (!image) return setWarn('No image');
+		if (!content) return setWarn('No content');
+		if (!category) return setWarn('No category');
 		dispatch(
 			addPost(
 				{
@@ -73,7 +58,6 @@ function Edit() {
 					<input
 						className="categories"
 						type="text"
-						name="product"
 						list="categories"
 						onChange={(e) => setCategory(e.target.value)}
 					/>

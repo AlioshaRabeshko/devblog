@@ -3,6 +3,7 @@
 const express = require('express');
 const Sequelize = require('sequelize');
 const Posts = require('../models/posts');
+const Statics = require('../models/statics');
 const Users = require('../models/users');
 const DeletedPosts = require('../models/deletedPosts');
 const History = require('../models/postsHistory');
@@ -66,6 +67,36 @@ router.get('/post/:id', async (req, res) => {
 	try {
 		const post = await Posts.findOne({ where: { id: req.params.id } });
 		post.seen++;
+		post.save();
+		return res.status(202).send(post);
+	} catch (err) {
+		return res.status(404).send(null);
+	}
+});
+
+router.get('/static/:page', async (req, res) => {
+	try {
+		const post = await Statics.findOne({ where: { page: req.params.page } });
+		return res.status(202).send(post);
+	} catch (err) {
+		return res.status(404).send(null);
+	}
+});
+
+router.post('/static', async (req, res) => {
+	try {
+		const post = await Statics.create(req.body);
+		return res.status(202).send(post);
+	} catch (err) {
+		return res.status(404).send(null);
+	}
+});
+
+router.put('/static/:page', async (req, res) => {
+	try {
+		const post = await Statics.findOne({ where: { page: req.params.page } });
+		if (req.body.title) post.title = req.body.title;
+		if (req.body.content) post.content = req.body.content;
 		post.save();
 		return res.status(202).send(post);
 	} catch (err) {

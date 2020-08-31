@@ -20,7 +20,7 @@ function Left() {
 						id="search"
 						onChange={(e) => setQuery(e.target.value)}
 					/>
-					<Link to={query ? `/search/${query}/` : ''}>
+					<Link to={query ? `/search/${query}/` : '/'}>
 						<button>Search</button>
 					</Link>
 				</div>

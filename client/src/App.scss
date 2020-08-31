@@ -32,13 +32,15 @@ body {
 	display: flex;
 	padding: 5px;
 	list-style: none;
-}
-
-.menu-item {
-	flex: 1;
-	margin: 0;
-	padding: 10px;
-	justify-items: flex-end;
+	.menu-item {
+		flex: 1;
+		margin: 0;
+		padding: 10px;
+		justify-items: flex-end;
+	}
+	.active {
+		color: $redLinks;
+	}
 }
 
 a:link,
@@ -604,7 +606,8 @@ select {
 
 #tab-btn-1:checked ~ #content-1,
 #tab-btn-2:checked ~ #content-2,
-#tab-btn-3:checked ~ #content-3 {
+#tab-btn-3:checked ~ #content-3,
+#tab-btn-4:checked ~ #content-4 {
 	display: block;
 }
 

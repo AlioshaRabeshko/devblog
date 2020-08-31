@@ -6,6 +6,9 @@ import {
 	DELETE_POST,
 	EDIT_STATEMENT,
 	GET_UNVERIFIED,
+	GET_STATIC,
+	ADD_STATIC,
+	EDIT_STATIC,
 	LOADING,
 } from './types';
 import axios from 'axios';
@@ -47,6 +50,25 @@ export const getPost = (id) => (dispatch) => {
 		);
 };
 
+export const getStatic = (page) => (dispatch) => {
+	dispatch(setLoading());
+	axios
+		.get(`/api/posts/static/${page}`)
+		.then((res) => {
+			console.log('res: ', res);
+			dispatch({
+				type: GET_STATIC,
+				payload: res.data,
+			});
+		})
+		.catch(() =>
+			dispatch({
+				type: GET_STATIC,
+				payload: null,
+			})
+		);
+};
+
 export const addPost = (data, history) => (dispatch) => {
 	axios.post('/api/posts/add', data).then((res) => {
 		history.push(`/post/${res.data.id}`);
@@ -57,11 +79,31 @@ export const addPost = (data, history) => (dispatch) => {
 	});
 };
 
+export const addStatic = (data, history) => (dispatch) => {
+	axios.post('/api/posts/static', data).then((res) => {
+		history.push(`/static/${res.data.page}`);
+		dispatch({
+			type: ADD_STATIC,
+			payload: res.data,
+		});
+	});
+};
+
 export const editPost = (id, userId, data, cb) => (dispatch) => {
 	axios.put(`/api/posts/edit/${id}`, { userId, data }).then((res) => {
 		cb();
 		dispatch({
 			type: EDIT_STATEMENT,
+			payload: res.data,
+		});
+	});
+};
+
+export const editStatic = (page, data, cb) => (dispatch) => {
+	axios.put(`/api/posts/static/${page}`, data).then((res) => {
+		cb();
+		dispatch({
+			type: EDIT_STATIC,
 			payload: res.data,
 		});
 	});

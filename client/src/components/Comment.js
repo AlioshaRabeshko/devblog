@@ -21,7 +21,7 @@ function Comments(props) {
 					props.comment.author.role === 'Supervisor' ||
 					props.comment.author.role === 'Author'
 						? 'box-supervisor'
-						: ''
+						: null
 				}`}>
 				<div className="author-info">
 					<p className="author">{props.comment.author.name}</p>

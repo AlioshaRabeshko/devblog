@@ -18,7 +18,7 @@ function NewComment(props) {
 	const { id } = useParams();
 	const { user } = useSelector((state) => state.user.user);
 	const dispatch = useDispatch();
-	if (user.name === '') return '';
+	if (user.name === '') return null;
 	if (!status) {
 		return (
 			<button className="logout" onClick={() => setStatus(true)}>
@@ -40,9 +40,7 @@ function NewComment(props) {
 						}}>
 						Comment
 					</button>
-				) : (
-					''
-				)
+				) : null
 			) : (
 				<button
 					className="logout"

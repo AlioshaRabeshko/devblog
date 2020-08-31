@@ -25,3 +25,6 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const USER_LOADING = 'USER_LOADING';
 export const LOADING = 'LOADING';
 export const ERROR = 'ERROR';
+export const GET_STATIC = 'GET_STATIC';
+export const ADD_STATIC = 'ADD_STATIC';
+export const EDIT_STATIC = 'EDIT_STATIC';

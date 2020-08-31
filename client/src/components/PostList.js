@@ -17,7 +17,7 @@ function PostList(props) {
 		for (let i = window.scrollY; i > 0; i--)
 			window.setTimeout(() => window.scrollTo(0, i), 100);
 	}, [dispatch, author, category, query, page]);
-	if (loading) return '';
+	if (loading) return null;
 	return (
 		<div className="container list-container">
 			<div className="right-container">
@@ -25,7 +25,7 @@ function PostList(props) {
 			</div>
 			<Left />
 			{posts.rows.map((el, id) =>
-				id !== 0 ? <NarrowPost post={el} key={id} /> : ''
+				id !== 0 ? <NarrowPost post={el} key={id} /> : null
 			)}
 			{posts.rows.length - 1 < 7 && (posts.rows.length - 1) % 2 !== 0 ? (
 				<NarrowPost />
