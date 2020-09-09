@@ -4,6 +4,7 @@ import Post from './Post';
 import User from './User';
 import Sign from './Sign';
 import Edit from './Edit';
+import CV from './CV';
 import Static from './Static';
 import EditStatic from './EditStatic';
 import Undefined from './Undefined';
@@ -12,6 +13,7 @@ import { Route, Switch } from 'react-router-dom';
 
 const Container = () => (
 	<Switch>
+		<Route path="/cv" component={CV} />
 		<Route path="/post/:id" component={Post} />
 		<Route path="/author/:author/:page?" component={PostList} />
 		<Route path="/category/:category/:page?" component={PostList} />

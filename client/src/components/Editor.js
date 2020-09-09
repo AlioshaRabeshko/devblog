@@ -12,7 +12,10 @@ function TextEditor() {
 			value={content}
 			apiKey="hcnwhdxlemckajk9mdxkg4k04eqi1vk1lmpzr6d1qjsandxi"
 			init={{
-				menubar: true,
+				menubar: false,
+				relative_urls: false,
+				remove_script_host: false,
+				convert_urls: true,
 				plugins: [
 					'advlist autolink lists link image charmap preview anchor \n' +
 						'searchreplace visualblocks code fullscreen \n' +
